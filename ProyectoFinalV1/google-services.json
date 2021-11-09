@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "839770423756",
+    "project_id": "proyecto-final-lenguajes-4",
+    "storage_bucket": "proyecto-final-lenguajes-4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839770423756:android:bd40284699aa4a2a40dd69",
+        "android_client_info": {
+          "package_name": "com.oropezayampa.socialmovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839770423756-9q370vo7d5c5eqgfga7dn80c5vn4tb0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839770423756-9q370vo7d5c5eqgfga7dn80c5vn4tb0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
