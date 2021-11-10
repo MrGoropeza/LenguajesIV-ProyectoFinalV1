@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoFinalV1.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace ProyectoFinalV1
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Prueba();
         }
 
         protected override void OnStart()
