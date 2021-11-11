@@ -1,4 +1,5 @@
-﻿using ProyectoFinalV1.Services;
+﻿using ProyectoFinalV1.Models;
+using ProyectoFinalV1.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +29,14 @@ namespace ProyectoFinalV1.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            
+            UserModel usuarioPrueba = new UserModel();
+            usuarioPrueba.UID = "pfs3oEDjvaZCPiiLQkNHOvURwEs1";
+            usuarioPrueba.username = "goropeza301";
+            usuarioPrueba.friends = new Dictionary<string, string>();
+            usuarioPrueba.friends.Add("ID1", "gonzalo");
+            usuarioPrueba.friends.Add("ID2","nicolas");
+            FirebaseProvider provider = new FirebaseProvider();
+            await provider.AddUser(usuarioPrueba);
         }
     }
 }

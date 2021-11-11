@@ -1,0 +1,41 @@
+﻿
+Base de datos
+	Users
+		UserID1
+			name: string
+			surname: string
+			age: int
+			UID: string
+			Friends
+				FriendID1: nomYapel
+				FriendID2: nomYapel
+			Likes
+				MovieID1: title
+				MovieID2: title
+			Opinions
+				OpinionID1: 
+			Classes
+				ClassID1: nombreClase
+				ClassID2: nombreClase
+	Opinions
+		OpinionID1
+			stars: double
+			opinion: string
+			movieID: string
+			userID: string
+		OpinionID2
+			stars: double
+			opinion: string
+			movieID: string
+			userID: string
+	Classes
+		ClassID1
+			nombre: string
+			professors
+				professorID1: nomYapel
+				professorID2: nomYapel
+			students
+				studentID1: nomYapel
+				studentID2: nomYapel
+	Movies
+		

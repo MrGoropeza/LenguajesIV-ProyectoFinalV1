@@ -20,13 +20,13 @@ namespace ProyectoFinalV1.Services
         private string language = "es-ES";
 
         TMDbClient client;
-        async Task<List<Pelicula>> getEnCines()
+        async Task<List<PeliculaModel>> getEnCines()
         {
-            List<Pelicula> enCines = new List<Pelicula>();
+            List<PeliculaModel> enCines = new List<PeliculaModel>();
             SearchContainerWithDates<SearchMovie> request = await client.GetMovieNowPlayingListAsync(language);
             foreach(SearchMovie r in request.Results)
             {
-                enCines.Add(new Pelicula()
+                enCines.Add(new PeliculaModel()
                 {
                     movieID = r.Id,
                     title = r.Title,
@@ -47,13 +47,13 @@ namespace ProyectoFinalV1.Services
             return enCines;
         }
 
-        async Task<List<Pelicula>> getPopulares()
+        async Task<List<PeliculaModel>> getPopulares()
         {
-            List<Pelicula> populares = new List<Pelicula>();
+            List<PeliculaModel> populares = new List<PeliculaModel>();
             SearchContainer<SearchMovie> request = await client.GetMoviePopularListAsync(language);
             foreach (SearchMovie r in request.Results)
             {
-                populares.Add(new Pelicula()
+                populares.Add(new PeliculaModel()
                 {
                     movieID = r.Id,
                     title = r.Title,

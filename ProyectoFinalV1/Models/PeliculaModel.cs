@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProyectoFinalV1.Models
 {
-    public class Pelicula
+    public class PeliculaModel
     {
         #region principales
             public int movieID { get; set; }
