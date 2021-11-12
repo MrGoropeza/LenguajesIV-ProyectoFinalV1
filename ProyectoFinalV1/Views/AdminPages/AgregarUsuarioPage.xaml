@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.AdminPages.AgregarUsuarioPage">
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <Label Text="username"/>
+            <Entry Placeholder="nombre usuario"
+                   IsEnabled="{Binding IsEnabledTxt}"
+                   Text="{Binding UsernameTxt}"/>
+            
+            <Label Text="correo"/>
+            <Entry Placeholder="example@gmail.com"
+                   Keyboard="Email"
+                   IsEnabled="{Binding IsEnabledTxt}"
+                   Text="{Binding EmailTxt}"/>
+            
+            <Label Text="contraseña"/>
+            <Entry Placeholder="********"
+                   IsPassword="True"
+                   IsEnabled="{Binding IsEnabledTxt}"
+                   Text="{Binding PasswordTxt}"/>
+            
+            <Label Text="nombre"/>
+            <Entry IsEnabled="{Binding IsEnabledTxt}"
+                   Text="{Binding NombreTxt}"/>
+            
+            <Label Text="apellido"/>
+            <Entry IsEnabled="{Binding IsEnabledTxt}"
+                   Text="{Binding ApellidoTxt}"/>
+            
+            <Label Text="edad"/>
+            <Entry Keyboard="Numeric"
+                   IsEnabled="{Binding IsEnabledTxt}"
+                   Text="{Binding EdadTxt}"/>
+
+            <ActivityIndicator IsRunning="{Binding IsRunningTxt}"
+                               IsVisible="{Binding IsVisibleTxt}"/>
+            
+            <Button Text="Agregar Usuario"
+                    Command="{Binding AgregarUsuarioCommand}"
+                    IsEnabled="{Binding IsEnabledTxt}"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -11,7 +11,7 @@ namespace ProyectoFinalV1
         {
             InitializeComponent();
 
-            MainPage = new Prueba();
+            MainPage = new NavigationPage(new AdminPage());
         }
 
         protected override void OnStart()

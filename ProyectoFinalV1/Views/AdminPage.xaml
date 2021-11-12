@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.AdminPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="La zona del admin"
+                       FontSize="30"/>
+                <Button Text="insertar usuario"  Clicked="InsertarUsuario_Clicked"/>
+                <Button Text="ver usuarios" Clicked="VerUsers_Clicked"/>
+                <Label x:Name="labelUsers"
+                       IsVisible="false"
+                       TextColor="Black"/>
+                <Button Text="insertar opinion en usuario"/>
+                <Button Text="insertar like en usuario"/>
+                <Button Text="insertar clase en usuario"/>
+                <Button/>
+                <Button/>
+                <Button/>
+                <Button/>
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

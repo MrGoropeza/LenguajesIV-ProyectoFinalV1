@@ -5,7 +5,15 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"/>
-            <Button Text="insertarUsuario"  Clicked="Button_Clicked"/>
+            <Button Text="insertar usuario"  Clicked="Button_Clicked"/>
+            <Button Text="insertar amigo en usuario"/>
+            <Button Text="insertar opinion en usuario"/>
+            <Button Text="insertar like en usuario"/>
+            <Button Text="insertar clase en usuario"/>
+            <Button/>
+            <Button/>
+            <Button/>
+            <Button/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
