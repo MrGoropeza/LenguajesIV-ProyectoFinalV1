@@ -31,7 +31,7 @@ namespace ProyectoFinalV1.Views
         {
             UserModel usuarioPrueba = new UserModel();
             usuarioPrueba.UID = "pfs3oEDjvaZCPiiLQkNHOvURwEs1";
-            usuarioPrueba.username = "goropeza301";
+            //usuarioPrueba.username = "goropeza301";
             usuarioPrueba.friends = new Dictionary<string, string>();
             usuarioPrueba.friends.Add("ID1", "gonzalo");
             usuarioPrueba.friends.Add("ID2","nicolas");
