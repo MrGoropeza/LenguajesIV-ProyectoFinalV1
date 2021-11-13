@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.InAppPages.StartPage">
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsRefreshingTxt}"
+                     Command="{Binding RefreshCommand}">
+        <ScrollView BackgroundColor="SlateGray">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Frame Grid.Row="0"
+                       CornerRadius="20"
+                       Margin="10"
+                       Padding="0"
+                       BackgroundColor="Azure">
+                    <StackLayout 
+                         Margin="10"
+                         HeightRequest="400">
+                        <Label Text="Peliculas en cine"
+                           TextColor="Black"
+                           FontSize="Title"
+                           />
+                        
+                        <CollectionView ItemsSource="{Binding EnCinesItems}"
+                                    x:Name="EnCinesCollection">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Row="0"
+                                           Source="{Binding imageUrl}"
+                                           Aspect="AspectFit"
+                                       HeightRequest="280"/>
+                                        <Label Grid.Row="1"
+                                           Text="{Binding title}"
+                                           FontSize="Medium"
+                                           HorizontalOptions="FillAndExpand"
+                                       WidthRequest="180"/>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1"
+                       CornerRadius="20"
+                       Margin="10"
+                       Padding="0"
+                       BackgroundColor="Azure">
+                    <StackLayout 
+                         Margin="10"
+                         HeightRequest="400">
+                        <Label Text="Peliculas populares"
+                           TextColor="Black"
+                           FontSize="Title"/>
+                            <CollectionView ItemsSource="{Binding PelisPopularesItems}"
+                                        RemainingItemsThresholdReachedCommand="{Binding ActualizarPelisPopularesCommand}"
+                                        RemainingItemsThreshold="{Binding ItemTreshold}"
+                                    x:Name="PelisPopularesCollection">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Row="0"
+                                           Source="{Binding imageUrl}"
+                                           Aspect="AspectFit"
+                                       HeightRequest="280"/>
+                                        <Label Grid.Row="1"
+                                           Text="{Binding title}"
+                                           FontSize="Medium"
+                                           HorizontalOptions="FillAndExpand"
+                                       WidthRequest="180"/>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+
+                        </CollectionView>
+
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="2"
+                       CornerRadius="20"
+                       Margin="10"
+                       Padding="0"
+                       BackgroundColor="Azure">
+                    <StackLayout 
+                         Margin="10"
+                         HeightRequest="400">
+                        <Label Text="Series Populares"
+                           TextColor="Black"
+                           FontSize="Title"/>
+                        <CollectionView ItemsSource="{Binding SeriesPopItems}"
+                                    RemainingItemsThresholdReachedCommand="{Binding ActualizarCommand}"  
+                                    x:Name="SeriesPopulares">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Row="0"
+                                           Source="{Binding imageUrl}"
+                                           Aspect="AspectFit"
+                                       HeightRequest="280"/>
+                                        <Label Grid.Row="1"
+                                           Text="{Binding title}"
+                                           FontSize="Medium"
+                                           HorizontalOptions="FillAndExpand"
+                                       WidthRequest="180"/>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+
+                        </CollectionView>
+
+                    </StackLayout>
+                </Frame>
+
+            </Grid>
+        </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

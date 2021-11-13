@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using ProyectoFinalV1.Views;
+using ProyectoFinalV1.Views.InAppPages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,6 +61,9 @@ namespace ProyectoFinalV1.ViewModels
         #region Methods
         private async void LoginMethod()
         {
+            this.IsVisibleTxt = true;
+            this.IsRunningTxt = true;
+            this.IsEnabledTxt = false;
             if (string.IsNullOrEmpty(this.email))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -76,27 +80,26 @@ namespace ProyectoFinalV1.ViewModels
                     "Aceptar");
                 return;
             }
-            string WebAPIkey = "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0";
-            
-            
-
 
             try
             {
                 App.autenticacion = await App.firebaseAuth.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
                 
-                await Application.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new PrincipalTabbedPage());
             }
             catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
+                
             }
 
-            this.IsVisibleTxt = true;
-            this.IsRunningTxt = true;
-            this.IsEnabledTxt = false;
+            
 
             await Task.Delay(20);
+
+            this.IsVisibleTxt = false;
+            this.IsRunningTxt = false;
+            this.IsEnabledTxt = true;
 
         }
 

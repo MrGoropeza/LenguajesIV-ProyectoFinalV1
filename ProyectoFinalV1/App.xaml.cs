@@ -12,6 +12,7 @@ namespace ProyectoFinalV1
     {
         public static FirebaseProvider firebaseBDD;
         public static FirebaseAuthProvider firebaseAuth;
+        public static PeliculasProvider tmdbProvider;
         private string WebAPIkey = "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0";
         public static FirebaseAuthLink autenticacion;
         public App()
@@ -19,6 +20,7 @@ namespace ProyectoFinalV1
             InitializeComponent();
             firebaseAuth = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
             firebaseBDD = new FirebaseProvider();
+            tmdbProvider = new PeliculasProvider();
             MainPage = new NavigationPage(new LoginPage());
         }
 
