@@ -6,6 +6,7 @@ using ProyectoFinalV1.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -23,6 +24,7 @@ namespace ProyectoFinalV1.ViewModels.AdminViewModels
         public bool isRunning;
         public bool isVisible;
         public bool isEnabled;
+        private string firebaseToken;
         #endregion
         #region Propiedades
         public string UsernameTxt
@@ -136,24 +138,33 @@ namespace ProyectoFinalV1.ViewModels.AdminViewModels
             }
             string WebAPIkey = "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0";
 
+            IsRunningTxt = true;
+            IsVisibleTxt = true;
+
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
+            
             try
             {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
+
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
-                string gettoken = auth.FirebaseToken;
+                firebaseToken = auth.FirebaseToken;
+                auth.User.LastName = this.apellido;
+                auth.User.FirstName = this.nombre;
+                
+                
                 UserModel nuevoUsuario = new UserModel();
                 nuevoUsuario.apellido = this.apellido;
                 nuevoUsuario.edad = this.edad;
                 nuevoUsuario.nombre = this.nombre;
-                nuevoUsuario.UID = gettoken;
                 nuevoUsuario.username = this.username;
-
-
+                await firebaseBDD.AddUser(nuevoUsuario);
+                IsRunningTxt = false;
+                IsVisibleTxt = false;
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
-                
+                await authProvider.DeleteUserAsync(firebaseToken);
                 await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
             }
             

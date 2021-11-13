@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.StartPages.RecuperarClave"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <StackLayout Grid.Row="1" HorizontalOptions="Center" Orientation="Vertical" Margin="0,0,0,10">
+                    <Label
+                         Text="Recuperar Constraseña"
+                         FontAttributes="Bold"
+                         HorizontalOptions="Center"
+                         FontSize="26"
+                         Margin="0,0,0,5"
+                         WidthRequest="300"
+                         TextColor="{OnPlatform Android=Black}"
+                         />
+                    <Label
+                    Text="Escribe el correo de tu cuenta"
+                            TextColor="Black"
+                            FontSize="15"
+                            WidthRequest="300"
+                    />
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
+                    
+                    <Frame
+                    HasShadow="{OnPlatform Android=true,iOS=false}"
+                    Padding="{OnPlatform Android=8,iOS=0}"
+                    CornerRadius="{OnPlatform Android=7}"
+                    >
+                        <Entry
+                    Placeholder="ejemplo@correo.com"
+                    Keyboard="Email"
+                    MaxLength="25"
+                    Text="{Binding EmailTxt, Mode=TwoWay}"
+                    IsEnabled="{Binding IsEnabledTxt}"
+                    FontSize="{OnPlatform Android=15,iOS=16}"
+                    />
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" HorizontalOptions="Center" Padding="0">
+                    <ActivityIndicator
+                       IsRunning="{Binding IsRunningTxt}"
+                       IsVisible="{Binding IsVisibleTxt}"
+                       Color="Black"
+                       Scale="0.8"
+                     
+                       />
+                </StackLayout>
+
+                <StackLayout Grid.Row="4" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center" Padding="0">
+                    <Button
+                             Text="Enviar"
+                             TextColor="Black"
+                             FontSize="{OnPlatform Android=13}"
+                             WidthRequest="150"
+                             HorizontalOptions="End"
+                             BackgroundColor="White"
+                             HeightRequest="50"
+                             Padding="0"
+                             IsEnabled="{Binding IsEnabledTxt}"
+                            Command="{Binding RecuperarCommand}"
+                            />
+                    <Button
+                             Text="Cancelar"
+                             TextColor="Black"
+                             FontSize="{OnPlatform Android=13}"
+                             WidthRequest="150"
+                             HorizontalOptions="End"
+                             BackgroundColor="White"
+                             HeightRequest="50"
+                             Padding="0"
+                             IsEnabled="{Binding IsEnabledTxt}"
+                            Clicked="Volver_Clicked"
+                            />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

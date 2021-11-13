@@ -68,7 +68,7 @@ namespace ProyectoFinalV1.Services
         {
             await firebase
                 .Child("Users")
-                .Child(user.UID)
+                .Child(user.username)
                 .PutAsync(user);
         }
         public async Task AddClass(ClassModel clase)
@@ -101,7 +101,12 @@ namespace ProyectoFinalV1.Services
         #endregion
 
         #region Deletes
-
+        public async Task RemoveUser(string username)
+        {
+            await firebase.Child("Users")
+                .Child(username)
+                .DeleteAsync();
+        }
         #endregion
 
         static FirebaseClient firebase = new FirebaseClient("https://proyecto-final-lenguajes-4-default-rtdb.firebaseio.com/");

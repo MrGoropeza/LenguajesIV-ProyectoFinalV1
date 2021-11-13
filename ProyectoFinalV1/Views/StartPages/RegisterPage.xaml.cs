@@ -10,11 +10,20 @@ using Xamarin.Forms.Xaml;
 namespace ProyectoFinalV1.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class RegisterPage : ContentPage
     {
-        public LoginPage()
+        public RegisterPage()
         {
             InitializeComponent();
+        }
+        private async void Login_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

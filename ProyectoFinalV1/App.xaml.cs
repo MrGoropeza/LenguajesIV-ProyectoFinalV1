@@ -1,4 +1,7 @@
-﻿using ProyectoFinalV1.Views;
+﻿using Firebase.Auth;
+using Firebase.Database;
+using ProyectoFinalV1.Services;
+using ProyectoFinalV1.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,11 +10,16 @@ namespace ProyectoFinalV1
 {
     public partial class App : Application
     {
+        public static FirebaseProvider firebaseBDD;
+        public static FirebaseAuthProvider firebaseAuth;
+        private string WebAPIkey = "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0";
+        public static FirebaseAuthLink autenticacion;
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new AdminPage());
+            firebaseAuth = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
+            firebaseBDD = new FirebaseProvider();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

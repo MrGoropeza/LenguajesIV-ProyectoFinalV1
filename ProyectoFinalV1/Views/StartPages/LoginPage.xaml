@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProyectoFinalV1.Views.RegisterPage">
+             x:Class="ProyectoFinalV1.Views.LoginPage"
+             NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
         <ScrollView>
 
@@ -35,7 +36,7 @@
 
                 <StackLayout Grid.Row="2" HorizontalOptions="Center" Orientation="Vertical" Margin="0,0,0,10">
                     <Label
-                         Text="Welcome Back"
+                         Text="Bienvenido"
                          FontAttributes="Bold"
                          HorizontalOptions="Center"
                          FontSize="26"
@@ -44,7 +45,7 @@
                          TextColor="{OnPlatform Android=Black}"
                          />
                     <Label
-                    Text="Sign in to continue"
+                    Text="Inicia Sesión para continuar"
                             TextColor="Black"
                             FontSize="15"
                             WidthRequest="300"
@@ -63,7 +64,7 @@
                     CornerRadius="{OnPlatform Android=7}"
                     >
                         <Entry
-                    Placeholder="BFortuna@gmail.com"
+                    Placeholder="ejemplo@correo.com"
                     Keyboard="Email"
                     MaxLength="25"
                     Text="{Binding EmailTxt, Mode=TwoWay}"
@@ -77,23 +78,24 @@
 
                     <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="0">
                         <Label
-                    Text="Password"
-                    FontSize="{OnPlatform Android=13}"
-                    TextColor="Black"
-                     VerticalOptions="Center"
-                     WidthRequest="150"
-                    />
+                            Text="Constraseña"
+                            FontSize="{OnPlatform Android=13}"
+                            TextColor="Black"
+                             VerticalOptions="Center"
+                             WidthRequest="150"
+                            />
                         <Button
-                     Text="¿Forgot password?"
-                     TextColor="Black"
-                     FontSize="{OnPlatform Android=13}"
-                     WidthRequest="150"
-                     HorizontalOptions="End"
-                     BackgroundColor="White"
-                     HeightRequest="30"
-                     Padding="0"
-                     IsEnabled="{Binding IsEnabledTxt}"
-                    />
+                             Text="Recuperar Clave"
+                             TextColor="Black"
+                             FontSize="{OnPlatform Android=13}"
+                             WidthRequest="150"
+                             HorizontalOptions="End"
+                             BackgroundColor="White"
+                             HeightRequest="30"
+                             Padding="0"
+                             IsEnabled="{Binding IsEnabledTxt}"
+                            Clicked="Recuperar_Clicked"
+                            />
                     </StackLayout>
                     <Frame
                      HasShadow="{OnPlatform Android=true,iOS=false}"
@@ -129,7 +131,7 @@
 
                 <StackLayout Grid.Row="6" HorizontalOptions="Center" Orientation="Vertical" >
                     <Button
-                     Text="Log in"
+                     Text="Iniciar Sesion"
                             TextColor="Black"
                             Font="Montserrat-Medium.otf"
                             FontSize="{OnPlatform Android=15}"
@@ -142,7 +144,7 @@
                             IsEnabled="{Binding IsEnabledTxt}" 
                     />
                     <Button
-                            Text="Don't have an account? Sign Up"
+                            Text="¿No tenés cuenta? Registrate"
                             TextColor="{OnPlatform iOS=Black}"
                             FontSize="{OnPlatform Android=11,iOS=12}"
                             BackgroundColor="White"

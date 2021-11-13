@@ -1,6 +1,7 @@
 ﻿using Firebase.Auth;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using ProyectoFinalV1.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -63,33 +64,32 @@ namespace ProyectoFinalV1.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter an email.",
-                    "Accept");
+                    "Debes ingresar un correo.",
+                    "Aceptar");
                 return;
             }
             if (string.IsNullOrEmpty(this.password))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter a password.",
-                    "Accept");
+                    "Debes ingresar una contraseña.",
+                    "Aceptar");
                 return;
             }
             string WebAPIkey = "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0";
+            
+            
 
-            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
+
             try
             {
-                var auth = await authProvider.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
-                var content = await auth.GetFreshAuthAsync();
-                var serializedcontnet = JsonConvert.SerializeObject(content);
-
-                Preferences.Set("MyFirebaseRefreshToken", serializedcontnet);
-                //await Application.Current.MainPage.Navigation.PushAsync(new pruebas());
+                App.autenticacion = await App.firebaseAuth.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
+                
+                await Application.Current.MainPage.Navigation.PushAsync(new AdminPage());
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Invalid useremail or password", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
             }
 
             this.IsVisibleTxt = true;
