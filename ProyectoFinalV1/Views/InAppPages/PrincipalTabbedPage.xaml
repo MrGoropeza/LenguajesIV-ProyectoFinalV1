@@ -15,5 +15,6 @@
     <locals:StartPage Title="Inicio"
                       IconImageSource="homeLogo.png"
                       />
-
+    <locals:AmigosPage Title="Amigos" IconImageSource="amigos"/>
+    <locals:ConfiguracionPage Title="Configuracion" IconImageSource="configuracion" />
 </TabbedPage>
