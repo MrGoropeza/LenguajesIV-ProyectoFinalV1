@@ -8,5 +8,6 @@ namespace ProyectoFinalV1.Models
     {
         public string imageUrl { get; set; }
         public string title { get; set; }
+        public int id { get; set; }
     }
 }

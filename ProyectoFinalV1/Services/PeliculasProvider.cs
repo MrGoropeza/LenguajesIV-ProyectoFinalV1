@@ -79,6 +79,33 @@ namespace ProyectoFinalV1.Services
             return populares;
         }
 
+        public async Task<List<PeliculaModel>> getTopRated(int pagina)
+        {
+            List<PeliculaModel> topRated = new List<PeliculaModel>();
+            SearchContainer<SearchMovie> request = await client.GetMovieTopRatedListAsync(language, pagina);
+            foreach (SearchMovie r in request.Results)
+            {
+                topRated.Add(new PeliculaModel()
+                {
+                    movieID = r.Id,
+                    title = r.Title,
+                    overview = r.Overview,
+                    isForAdults = r.Adult,
+                    video = r.Video,
+                    backgroundPath = r.BackdropPath,
+                    posterPath = r.PosterPath,
+                    genreIDs = r.GenreIds,
+                    originalLanguage = r.OriginalLanguage,
+                    originalTitle = r.OriginalTitle,
+                    popularity = r.Popularity,
+                    voteAverage = r.VoteAverage,
+                    voteCount = r.VoteCount,
+                    releaseDate = r.ReleaseDate.Value,
+                });
+            }
+            return topRated;
+        }
+
         public PeliculasProvider()
         {
             client = new TMDbClient(this.apikey);
