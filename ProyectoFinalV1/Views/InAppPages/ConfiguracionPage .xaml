@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalV1.Views.InAppPages.ConfiguracionPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+            <Grid BackgroundColor="#3b83bd" RowSpacing="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="4" Margin="20,35,20,20">
+                    <Image HorizontalOptions="Center" Source="l.png" WidthRequest="100" HeightRequest="100" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" HorizontalOptions="Center">
+                    <Label Text="Usuario" TextColor="#030303" FontSize="25"/>
+                    <Entry BackgroundColor="#3b83bd" Text="MrGoropeza"></Entry>
+                    <Label Text="Correo Eletronico" TextColor="#030303" FontSize="25"/>
+                    <Entry BackgroundColor="#3b83bd" Text="MrGoropeza@gmail.com"></Entry>
+                    <Label Text="Contraseña" TextColor="#030303" FontSize="25"/>
+                    <Entry BackgroundColor="#3b83bd" Text="*********"></Entry>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Cambiar de Perfil"></Button>
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" VerticalOptions="End" Padding="20">
+                    <Button Text="Cerrar Sesion"></Button>
+
+                </StackLayout>
+            </Grid>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
