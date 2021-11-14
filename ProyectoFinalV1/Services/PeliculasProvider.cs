@@ -21,7 +21,7 @@ namespace ProyectoFinalV1.Services
         private string language = "es-ES";
 
         TMDbClient client;
-        public async Task<List<PeliculaModel>> getEnCines()
+        public async Task<List<PeliculaModel>> getEnCines(int sizePoster, int sizeBackground)
         {
             List<PeliculaModel> enCines = new List<PeliculaModel>();
             SearchContainerWithDates<SearchMovie> request = await client.GetMovieNowPlayingListAsync(language:language);
@@ -43,6 +43,8 @@ namespace ProyectoFinalV1.Services
                     voteAverage = r.VoteAverage,
                     voteCount = r.VoteCount,
                     releaseDate = r.ReleaseDate.Value,
+                    imageUrl = getUrlFromPath(r.PosterPath,sizePoster),
+                    backgroundUrl = getUrlFromPath(r.BackdropPath,sizeBackground),
                 });
             }
             return enCines;
@@ -52,7 +54,7 @@ namespace ProyectoFinalV1.Services
             return "https://image.tmdb.org/t/p/w"+size.ToString()+path;
         }
 
-        public async Task<List<PeliculaModel>> getPopulares(int pagina)
+        public async Task<List<PeliculaModel>> getPopulares(int pagina, int sizePoster, int sizeBackground)
         {
             List<PeliculaModel> populares = new List<PeliculaModel>();
             SearchContainer<SearchMovie> request = await client.GetMoviePopularListAsync(language,pagina);
@@ -74,12 +76,14 @@ namespace ProyectoFinalV1.Services
                     voteAverage = r.VoteAverage,
                     voteCount = r.VoteCount,
                     releaseDate = r.ReleaseDate.Value,
+                    imageUrl = getUrlFromPath(r.PosterPath, sizePoster),
+                    backgroundUrl = getUrlFromPath(r.BackdropPath, sizeBackground),
                 });
             }
             return populares;
         }
 
-        public async Task<List<PeliculaModel>> getTopRated(int pagina)
+        public async Task<List<PeliculaModel>> getTopRated(int pagina, int sizePoster, int sizeBackground)
         {
             List<PeliculaModel> topRated = new List<PeliculaModel>();
             SearchContainer<SearchMovie> request = await client.GetMovieTopRatedListAsync(language, pagina);
@@ -101,6 +105,8 @@ namespace ProyectoFinalV1.Services
                     voteAverage = r.VoteAverage,
                     voteCount = r.VoteCount,
                     releaseDate = r.ReleaseDate.Value,
+                    imageUrl = getUrlFromPath(r.PosterPath, sizePoster),
+                    backgroundUrl = getUrlFromPath(r.BackdropPath, sizeBackground),
                 });
             }
             return topRated;

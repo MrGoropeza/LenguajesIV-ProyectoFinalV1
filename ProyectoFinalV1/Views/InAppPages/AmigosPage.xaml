@@ -2,16 +2,65 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalV1.Views.InAppPages.AmigosPage">
-    <Grid>
+    <Grid BackgroundColor="SlateGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Text="Amigos" TextColor="Black" HorizontalOptions="Center" FontSize="Large" Padding="30"/>
+        <Frame 
+            Grid.Row="0"
+            CornerRadius="20"
+            Margin="15, 10, 10, 10"
+            Padding="0"
+            BackgroundColor="WhiteSmoke">
+            <SearchBar
+                Placeholder="Buscar Amigos" Grid.Row="0"
+                TextColor="White"
+                PlaceholderColor="White"
+                CancelButtonColor="White"
+                BackgroundColor="CadetBlue"/>
+        </Frame>
 
-        <SearchBar Placeholder="Buscar Amigos" Grid.Row="1"/>
+            
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding EnCinesItems}"
+            SelectionMode="Single"
+            SelectionChangedCommand="{Binding EnCinesSelectCommand}"
+            SelectedItem="{Binding EnCinesSelection}"
+            x:Name="EnCinesCollectionView">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0"
+                                           Source="{Binding imageUrl}"
+                                           Aspect="AspectFit"
+                                       HeightRequest="280"/>
+                        <Label Grid.Row="1"
+                                           Text="{Binding title}"
+                                           FontSize="Medium"
+                                           HorizontalOptions="FillAndExpand"
+                                       WidthRequest="180"/>
 
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
+    
+    
+    
 </ContentPage>

@@ -11,7 +11,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="Snow" />
+                                        Value="Gray" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -33,10 +33,24 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Frame Grid.Row="0"
+                <Frame 
+                    Grid.Row="0"
+                    CornerRadius="20"
+                    Margin="10, 10, 10, 10"
+                    Padding="0"
+                    BackgroundColor="CadetBlue">
+                    <SearchBar
+                        CancelButtonColor="White"
+                        PlaceholderColor="White"
+                        TextColor="White"
+                        Placeholder="Buscar películas"/>
+                </Frame>
+                
+                
+                <Frame Grid.Row="1"
                        CornerRadius="20"
                        Margin="10"
-                       Padding="0"
+                       Padding="3"
                        BackgroundColor="Azure">
                     <StackLayout 
                          Margin="10"
@@ -49,7 +63,7 @@
                         <CollectionView ItemsSource="{Binding EnCinesItems}"
                                         SelectionMode="Single"
                                         SelectionChangedCommand="{Binding EnCinesSelectCommand}"
-                                        >
+                                        SelectedItem="{Binding EnCinesSelection}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
@@ -61,124 +75,163 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Row="0"
-                                           Source="{Binding imageUrl}"
-                                           Aspect="AspectFit"
-                                       HeightRequest="280"/>
-                                        <Label Grid.Row="1"
-                                           Text="{Binding title}"
-                                           FontSize="Medium"
-                                           HorizontalOptions="FillAndExpand"
-                                       WidthRequest="180"/>
-
-                                    </Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Frame
+                                                Grid.Row="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent"
+                                                CornerRadius="20">
+                                                <StackLayout>
+                                                    <Image
+                                                        Source="{Binding imageUrl}"
+                                                        Aspect="AspectFit"
+                                                        HeightRequest="280"/>
+                                                    
+                                                </StackLayout>
+                                            </Frame>
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding title}"
+                                                TextColor="Black"
+                                                FontSize="Medium"
+                                                HorizontalOptions="FillAndExpand"
+                                                WidthRequest="180"/>
+                                        </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                         
                     </StackLayout>
+                    
                 </Frame>
 
-                <Frame Grid.Row="1"
+                    <Frame Grid.Row="2"
                        CornerRadius="20"
                        Margin="10"
-                       Padding="0"
+                       Padding="3"
                        BackgroundColor="Azure">
-                    <StackLayout 
+                        <StackLayout 
                          Margin="10"
                          HeightRequest="400">
-                        <Label Text="Peliculas populares"
+                            <Label Text="Peliculas populares"
                            TextColor="Black"
-                           FontSize="Title"/>
+                           FontSize="Title"
+                           />
+
                             <CollectionView ItemsSource="{Binding PelisPopularesItems}"
-                                        RemainingItemsThresholdReachedCommand="{Binding ActualizarPelisPopularesCommand}"
-                                        RemainingItemsThreshold="{Binding ItemTreshold}"
-                                    x:Name="PelisPopularesCollection">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Padding="10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Row="0"
-                                           Source="{Binding imageUrl}"
-                                           Aspect="AspectFit"
-                                       HeightRequest="280"/>
-                                        <Label Grid.Row="1"
-                                           Text="{Binding title}"
-                                           FontSize="Medium"
-                                           HorizontalOptions="FillAndExpand"
-                                       WidthRequest="180"/>
+                                RemainingItemsThresholdReachedCommand="{Binding ActualizarPelisPopularesCommand}"
+                                RemainingItemsThresholdReachedCommandParameter="pelisPopulares"
+                                RemainingItemsThreshold="{Binding ItemTreshold}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding PelisPopularesSelectCommand}"
+                                SelectedItem="{Binding PelisPopularesSelection}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Frame
+                                                Grid.Row="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent"
+                                                CornerRadius="20">
+                                                <StackLayout>
+                                                    <Image
+                                                        Source="{Binding imageUrl}"
+                                                        Aspect="AspectFit"
+                                                        HeightRequest="280"
+                                                        />
 
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
+                                                </StackLayout>
+                                            </Frame>
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding title}"
+                                                TextColor="Black"
+                                                FontSize="Medium"
+                                                HorizontalOptions="FillAndExpand"
+                                                WidthRequest="180"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
+                        </StackLayout>
+                    </Frame>
 
-                        </CollectionView>
-
-                    </StackLayout>
-                </Frame>
-
-                <Frame Grid.Row="2"
+                    <Frame Grid.Row="3"
                        CornerRadius="20"
                        Margin="10"
-                       Padding="0"
+                       Padding="3"
                        BackgroundColor="Azure">
-                    <StackLayout 
+                        <StackLayout 
                          Margin="10"
                          HeightRequest="400">
-                        <Label Text="Peliculas Mejores Valoradas"
+                            <Label Text="Peliculas más valoradas"
                            TextColor="Black"
-                           FontSize="Title"/>
-                        <CollectionView ItemsSource="{Binding TopRatedItems}"
-                                    RemainingItemsThresholdReachedCommand="{Binding ActualizarTopRatedCommand}"
-                                        RemainingItemsThreshold="{Binding ItemTreshold}"
-                                    >
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Padding="10">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image Grid.Row="0"
-                                           Source="{Binding imageUrl}"
-                                           Aspect="AspectFit"
-                                       HeightRequest="280"/>
-                                        <Label Grid.Row="1"
-                                           Text="{Binding title}"
-                                           FontSize="Medium"
-                                           HorizontalOptions="FillAndExpand"
-                                       WidthRequest="180"/>
+                           FontSize="Title"
+                           />
 
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
+                            <CollectionView
+                                ItemsSource="{Binding TopRatedItems}"
+                                RemainingItemsThresholdReachedCommand="{Binding ActualizarTopRatedCommand}"
+                                RemainingItemsThreshold="{Binding ItemTreshold}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding TopRatedSelectCommand}"
+                                SelectedItem="{Binding TopRatedSelection}">>
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Frame
+                                                Grid.Row="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent"
+                                                CornerRadius="20">
+                                                <StackLayout>
+                                                    <Image
+                                                        Source="{Binding imageUrl}"
+                                                        Aspect="AspectFit"
+                                                        HeightRequest="280"
+                                                        />
 
+                                                </StackLayout>
+                                            </Frame>
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding title}"
+                                                TextColor="Black"
+                                                FontSize="Medium"
+                                                HorizontalOptions="FillAndExpand"
+                                                WidthRequest="180"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
-                        </CollectionView>
-
-                    </StackLayout>
-                </Frame>
+                        </StackLayout>
+                    </Frame>
 
             </Grid>
         </ScrollView>

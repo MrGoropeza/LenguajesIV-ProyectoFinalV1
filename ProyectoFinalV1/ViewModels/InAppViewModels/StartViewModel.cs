@@ -13,19 +13,18 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
     public class StartViewModel : BaseViewModel
     {
         #region Atributos
-        public ObservableCollection<CardMovieModel> enCinesCollection;
+        public ObservableCollection<PeliculaModel> enCinesCollection;
+        public object enCinesSelection;
 
-        public ObservableCollection<CardMovieModel> pelisPopularesCollection;
+        public ObservableCollection<PeliculaModel> pelisPopularesCollection;
         private int paginaPelisPopulares;
+        public object pelisPopularesSelection;
 
-        public ObservableCollection<CardMovieModel> topRatedCollection;
+        public ObservableCollection<PeliculaModel> topRatedCollection;
         private int paginaTopRated;
+        public object topRatedSelection;
 
         public int itemTreshold;
-        private bool IsBusy;
-
-
-
         public bool isRefreshing;
         public bool isRunning;
         public bool isVisible;
@@ -33,25 +32,35 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         #endregion
 
         #region Propiedades
-        public ObservableCollection<CardMovieModel> EnCinesItems
+        public ObservableCollection<PeliculaModel> EnCinesItems
         {
             get { return this.enCinesCollection; }
             set { SetValue(ref this.enCinesCollection, value); }
         }
-        public ObservableCollection<CardMovieModel> PelisPopularesItems
+        public ObservableCollection<PeliculaModel> PelisPopularesItems
         {
             get { return this.pelisPopularesCollection; }
             set { SetValue(ref this.pelisPopularesCollection, value); }
         }
-        public ObservableCollection<CardMovieModel> TopRatedItems
+        public ObservableCollection<PeliculaModel> TopRatedItems
         {
             get { return this.topRatedCollection; }
             set { SetValue(ref this.topRatedCollection, value); }
         }
-        public int PaginaPelisPopulares
+        public object EnCinesSelection
         {
-            get { return this.paginaPelisPopulares; }
-            set { SetValue(ref this.paginaPelisPopulares, value); }
+            get { return this.enCinesSelection; }
+            set { SetValue(ref this.enCinesSelection, value); }
+        }
+        public object PelisPopularesSelection
+        {
+            get { return this.pelisPopularesSelection; }
+            set { SetValue(ref this.pelisPopularesSelection, value); }
+        }
+        public object TopRatedSelection
+        {
+            get { return this.topRatedSelection; }
+            set { SetValue(ref this.topRatedSelection, value); }
         }
         public int ItemTreshold
         {
@@ -109,8 +118,20 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                 return new RelayCommand(EnCinesSelectMethod);
             }
         }
-
-
+        public ICommand PelisPopularesSelectCommand
+        {
+            get
+            {
+                return new RelayCommand(PelisPopularesSelectMethod);
+            }
+        }
+        public ICommand TopRatedSelectCommand
+        {
+            get
+            {
+                return new RelayCommand(TopRatedSelectMethod);
+            }
+        }
 
 
         #endregion
@@ -118,128 +139,154 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         #region Metodos
         private async void EnCinesSelectMethod()
         {
-            await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+            await selectInCollection("enCines");
+        }
+        private async void PelisPopularesSelectMethod()
+        {
+            await selectInCollection("pelisPopulares");
+        }
+        private async void TopRatedSelectMethod()
+        {
+            await selectInCollection ("topRated");
+        }
+        private async Task selectInCollection(string nombreColeccion)
+        {
+            switch (nombreColeccion)
+            {
+                case "enCines":
+                    if (enCinesSelection != null)
+                    {
+                        await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                    }
+                    EnCinesSelection = null;
+                    break;
+                case "pelisPopulares":
+                    if (pelisPopularesSelection != null)
+                    {
+                        await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                    }
+                    PelisPopularesSelection = null;
+                    break;
+                case "topRated":
+                    if (topRatedSelection != null)
+                    {
+                        await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                    }
+                    TopRatedSelection = null;
+                    break;
+            }
         }
         private async void RefreshMethod()
         {
             IsRefreshingTxt = true;
-            await LlenarEnCines();
-            PaginaPelisPopulares = 1;
-            paginaTopRated = 1;
+
+            EnCinesItems.Clear();
+            await LlenarColeccion("enCines");
+
             PelisPopularesItems.Clear();
+            paginaPelisPopulares = 1;
+            await LlenarColeccion("pelisPopulares");
+
             TopRatedItems.Clear();
-            await LlenarPelisPopulares();
-            await LlenarTopRated();
+            paginaTopRated = 1;
+            await LlenarColeccion("topRated");
+
             IsRefreshingTxt = false;
         }
         private async void ActualizarPelisPopularesMethod()
         {
-            List<PeliculaModel> peliculasRequest = await App.tmdbProvider.getPopulares(PaginaPelisPopulares);
-            
-            foreach (PeliculaModel peli in peliculasRequest)
-            {
-                CardMovieModel card = new CardMovieModel()
-                {
-                    imageUrl = App.tmdbProvider.getUrlFromPath(peli.posterPath, 500),
-                    title = peli.title,
-                    id = peli.movieID
-                };
-                bool exists = false;
-                foreach(CardMovieModel p in PelisPopularesItems){
-                    if (p.id == card.id)
-                    {
-                        exists = true;
-                    }
-                }
-                if (!exists)
-                {
-                    PelisPopularesItems.Add(card);
-                }
-                
-            }
-            PaginaPelisPopulares++;
+            await ActualizarColeccion("pelisPopulares");
         }
-        private async Task LlenarPelisPopulares()
-        {
-            List<PeliculaModel> peliculasRequest = await App.tmdbProvider.getPopulares(PaginaPelisPopulares);
-            foreach (PeliculaModel peli in peliculasRequest)
-            {
-                PelisPopularesItems.Add(new CardMovieModel()
-                {
-                    imageUrl = App.tmdbProvider.getUrlFromPath(peli.posterPath, 500),
-                    title = peli.title,
-                    id = peli.movieID
-                });
-            }
-            PaginaPelisPopulares++;
-        }
-        private async Task LlenarEnCines()
-        {
-            EnCinesItems.Clear();
-            List<PeliculaModel> peliculasRequest = await App.tmdbProvider.getEnCines();
-            foreach (PeliculaModel peli in peliculasRequest)
-            {
-                EnCinesItems.Add(new CardMovieModel()
-                {
-                    imageUrl = App.tmdbProvider.getUrlFromPath(peli.posterPath,500),
-                    title = peli.title
-                }) ;
-            }
-        }
-
         private async void ActualizarTopRatedMethod()
         {
-            List<PeliculaModel> peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated);
-
-            foreach (PeliculaModel peli in peliculasRequest)
-            {
-                CardMovieModel card = new CardMovieModel()
-                {
-                    imageUrl = App.tmdbProvider.getUrlFromPath(peli.posterPath, 500),
-                    title = peli.title,
-                    id = peli.movieID
-                };
-                bool exists = false;
-                foreach (CardMovieModel p in TopRatedItems)
-                {
-                    if (p.id == card.id)
-                    {
-                        exists = true;
-                    }
-                }
-                if (!exists)
-                {
-                    TopRatedItems.Add(card);
-                }
-
-            }
-            PaginaPelisPopulares++;
+            await ActualizarColeccion("topRated");
         }
-
-        private async Task LlenarTopRated()
+        private async Task ActualizarColeccion(string nombreColeccion)
         {
-            List<PeliculaModel> peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated);
-            foreach (PeliculaModel peli in peliculasRequest)
+            List<PeliculaModel> peliculasRequest = new List<PeliculaModel>();
+            switch (nombreColeccion)
             {
-                TopRatedItems.Add(new CardMovieModel()
-                {
-                    imageUrl = App.tmdbProvider.getUrlFromPath(peli.posterPath, 500),
-                    title = peli.title,
-                    id = peli.movieID
-                });;
+                case "pelisPopulares":
+                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,600);
+                    foreach (PeliculaModel peli in peliculasRequest)
+                    {
+                        bool exists = false;
+                        foreach (PeliculaModel p in PelisPopularesItems)
+                        {
+                            if (p.movieID == peli.movieID)
+                            {
+                                exists = true;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            PelisPopularesItems.Add(peli);
+                        }
+
+                    }
+                    paginaPelisPopulares++;
+                    break;
+                case "topRated":
+                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,600);
+                    foreach (PeliculaModel peli in peliculasRequest)
+                    {
+                        bool exists = false;
+                        foreach (PeliculaModel p in TopRatedItems)
+                        {
+                            if (p.movieID == peli.movieID)
+                            {
+                                exists = true;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            TopRatedItems.Add(peli);
+                        }
+                    }
+                    paginaTopRated++;
+                    break;
             }
-            paginaTopRated++;
         }
 
 
+        private async Task LlenarColeccion(string nombreColeccion)
+        {
+            List<PeliculaModel> peliculasRequest = new List<PeliculaModel>();
+            switch (nombreColeccion)
+            {
+                case "enCines":
+                    peliculasRequest = await App.tmdbProvider.getEnCines(500, 600);
+                    foreach (PeliculaModel peli in peliculasRequest)
+                    {
+                        EnCinesItems.Add(peli);
+                    }
+                    break;
+                case "pelisPopulares":
+                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,600);
+                    foreach (PeliculaModel peli in peliculasRequest)
+                    {
+                        PelisPopularesItems.Add(peli);
+                    }
+                    paginaPelisPopulares++;
+                    break;
+                case "topRated":
+                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,600);
+                    foreach (PeliculaModel peli in peliculasRequest)
+                    {
+                        TopRatedItems.Add(peli);
+                    }
+                    paginaTopRated++;
+                    break;
+            }
+        }
         #endregion
 
         #region Constructor
         public StartViewModel()
         {
-            EnCinesItems = new ObservableCollection<CardMovieModel>();
-            pelisPopularesCollection = new ObservableCollection<CardMovieModel>();
-            topRatedCollection = new ObservableCollection<CardMovieModel>();
+            EnCinesItems = new ObservableCollection<PeliculaModel>();
+            pelisPopularesCollection = new ObservableCollection<PeliculaModel>();
+            topRatedCollection = new ObservableCollection<PeliculaModel>();
             RefreshMethod();
             ItemTreshold = 1;
         }

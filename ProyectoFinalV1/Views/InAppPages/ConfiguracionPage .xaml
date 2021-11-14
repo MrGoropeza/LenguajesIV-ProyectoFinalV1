@@ -3,42 +3,138 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalV1.Views.InAppPages.ConfiguracionPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
-            <Grid BackgroundColor="#3b83bd" RowSpacing="25">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <ScrollView>
+        <Grid BackgroundColor="SlateGray" RowSpacing="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Row="4" Margin="20,35,20,20">
-                    <Image HorizontalOptions="Center" Source="l.png" WidthRequest="100" HeightRequest="100" />
+            <Frame
+                Grid.Row="0"
+                Padding="10"
+                Margin="20, 30, 20, 0"
+                BackgroundColor="Azure"
+                CornerRadius="20">
+                <StackLayout>
+                    <Label
+                        Text="Tu Nombre de Usuario"
+                        TextColor="Black"
+                        FontSize="20"/>
+                    <Frame
+                        Padding="0"
+                        CornerRadius="20">
+                        <Entry
+                            BackgroundColor="CadetBlue"
+                            Text="{Binding UserNameTxt}"
+                            IsEnabled="{Binding IsEnabledTxt}"/>
+                    </Frame>
+                    
                 </StackLayout>
+            </Frame>
+                <Frame
+                Grid.Row="1"
+                Padding="10"
+                Margin="20, 0, 20, 0"
+                BackgroundColor="Azure"
+                CornerRadius="20">
+                    <StackLayout>
+                        <Label
+                        Text="Tu Correo"
+                        TextColor="Black"
+                        FontSize="20"/>
+                        <Frame
+                        Padding="0"
+                        CornerRadius="20">
+                            <Entry
+                            BackgroundColor="CadetBlue"
+                            Text="{Binding EmailTxt}"
+                            IsEnabled="{Binding IsEnabledTxt}"/>
+                        </Frame>
 
-                <StackLayout Grid.Row="1" HorizontalOptions="Center">
-                    <Label Text="Usuario" TextColor="#030303" FontSize="25"/>
-                    <Entry BackgroundColor="#3b83bd" Text="MrGoropeza"></Entry>
-                    <Label Text="Correo Eletronico" TextColor="#030303" FontSize="25"/>
-                    <Entry BackgroundColor="#3b83bd" Text="MrGoropeza@gmail.com"></Entry>
-                    <Label Text="Contraseña" TextColor="#030303" FontSize="25"/>
-                    <Entry BackgroundColor="#3b83bd" Text="*********"></Entry>
+                    </StackLayout>
+            </Frame>
+            <Frame
+            Grid.Row="2"
+            Padding="10"
+            Margin="20, 0, 20, 0"
+            BackgroundColor="Azure"
+            CornerRadius="20">
+                <StackLayout>
+                    <Label
+                    Text="Tu Nombre"
+                    TextColor="Black"
+                    FontSize="20"/>
+                    <Frame
+                    Padding="0"
+                    CornerRadius="20">
+                        <Entry
+                        BackgroundColor="CadetBlue"
+                        Text="{Binding NombreTxt}"
+                        IsEnabled="{Binding IsEnabledTxt}"/>
+                    </Frame>
+
                 </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="3"
+                Padding="10"
+                Margin="20, 0, 20, 0"
+                BackgroundColor="Azure"
+                CornerRadius="20">
+                    <StackLayout>
+                        <Label
+                            Text="Tu Apellido"
+                            TextColor="Black"
+                            FontSize="20"/>
+                        <Frame
+                            Padding="0"
+                            CornerRadius="20">
+                            <Entry
+                                BackgroundColor="CadetBlue"
+                                Text="{Binding NombreTxt}"
+                                IsEnabled="{Binding IsEnabledTxt}"/>
+                        </Frame>
+                    </StackLayout>
+            </Frame>
+            <Frame
+                Grid.Row="4"
+                Padding="10"
+                Margin="20, 0, 20, 0"
+                BackgroundColor="Azure"
+                CornerRadius="20">
+                    <StackLayout>
+                        <Label
+                            Text="Tu Edad"
+                            TextColor="Black"
+                            FontSize="20"/>
+                        <Frame
+                            Padding="0"
+                            CornerRadius="20">
+                            <Entry
+                                BackgroundColor="CadetBlue"
+                                Text="{Binding NombreTxt}"
+                                IsEnabled="{Binding IsEnabledTxt}"/>
+                        </Frame>
+                    </StackLayout>
+            </Frame>
+                <StackLayout Grid.Row="5" HorizontalOptions="CenterAndExpand">
+                <Button Text="Cambiar datos"></Button>
+            </StackLayout>
 
-                <StackLayout Grid.Row="2" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Cambiar de Perfil"></Button>
-                </StackLayout>
+            <StackLayout Grid.Row="6" VerticalOptions="End" Padding="20">
+                <Button Text="Cerrar Sesion"></Button>
 
-                <StackLayout Grid.Row="3" VerticalOptions="End" Padding="20">
-                    <Button Text="Cerrar Sesion"></Button>
-
-                </StackLayout>
-            </Grid>
-        </StackLayout>
-
+            </StackLayout>
+        </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

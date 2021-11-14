@@ -20,6 +20,5 @@ namespace ProyectoFinalV1.Views.InAppPages
             BindingContext = new StartViewModel();
         }
 
-
     }
 }

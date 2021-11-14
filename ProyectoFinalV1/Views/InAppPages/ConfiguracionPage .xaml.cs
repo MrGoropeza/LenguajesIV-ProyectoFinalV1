@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoFinalV1.ViewModels.InAppViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ProyectoFinalV1.Views.InAppPages
         public ConfiguracionPage()
         {
             InitializeComponent();
+            BindingContext = new ConfiguracionViewModel();
         }
     }
 }

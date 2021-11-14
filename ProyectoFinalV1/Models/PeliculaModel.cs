@@ -16,10 +16,12 @@ namespace ProyectoFinalV1.Models
         #region imagenes
             public string backgroundPath { get; set; }
             public string posterPath { get; set; }
+            public string imageUrl { get; set; }
+            public string backgroundUrl { get; set; }
         #endregion
 
         #region stats
-            public double popularity { get; set; }
+        public double popularity { get; set; }
             public double voteAverage { get; set; }
             public double voteCount { get; set; }
         #endregion
