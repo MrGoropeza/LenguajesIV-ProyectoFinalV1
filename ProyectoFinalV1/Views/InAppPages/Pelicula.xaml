@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProyectoFinalV1.Views.InAppPages.Pelicula">
+             x:Class="ProyectoFinalV1.Views.InAppPages.Pelicula"
+             NavigationPage.HasNavigationBar="true"
+             Title="{Binding TitleTxt}">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#009dcf" >
-            <Grid>
+        <ScrollView>
+            <Grid
+                BackgroundColor="SlateGray">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -18,24 +21,23 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Frame Grid.Row="1" Padding="10" Margin="10,5,10,0" BackgroundColor="#3b83bd" CornerRadius="20">
-                    <StackLayout HorizontalOptions="Center">
-                        <Label Text="Avengers End Game" TextColor="Black" FontSize="20"></Label>
-                    </StackLayout>
-                </Frame>
-
-                <StackLayout Grid.Row="2">
-                    <Image HorizontalOptions="Center" Source="lk.png" WidthRequest="600" HeightRequest="300" />
+                <StackLayout Grid.Row="0">
+                    <Image
+                        HorizontalOptions="Center"
+                        Source="{Binding BackgroundUrl}"
+                        Aspect="AspectFit"
+                        WidthRequest="500"
+                        HeightRequest="240" />
                 </StackLayout>
-                <Frame Grid.Row="3" Padding="10" Margin="10,5,10,0" BackgroundColor="#3b83bd" CornerRadius="20">
+                <Frame Grid.Row="1" Padding="10" Margin="10,5,10,0" BackgroundColor="CadetBlue" CornerRadius="20">
                     <StackLayout >
-                        <Label Text="Calificacion: "  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                        <Label Text="Calificacion:"  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
                         <Label Text="Fecha de Estreno: "  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
                         <Label Text="Opinion Popular"  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
                     </StackLayout>
                 </Frame>
 
-                <Frame Grid.Row="4" Padding="10" Margin="10,5,10,0" BackgroundColor="#3b83bd" CornerRadius="20">
+                <Frame Grid.Row="2" Padding="10" Margin="10,5,10,0" BackgroundColor="CadetBlue" CornerRadius="20">
                     <StackLayout HorizontalOptions="Center" Margin="10"
                          HeightRequest="200">
                         <Label Text="Descripcion" TextColor="Black" FontSize="20"></Label>
@@ -43,6 +45,6 @@
                 </Frame>
 
             </Grid>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

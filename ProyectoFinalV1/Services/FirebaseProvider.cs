@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
 using ProyectoFinalV1.Models;
+using ProyectoFinalV1.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,21 @@ namespace ProyectoFinalV1.Services
     public class FirebaseProvider
     {
         #region Selects
+        public async Task<UserModel> getUserByEmail(string email)
+        {
+            UserModel buscado = new UserModel();
+            buscado.email = "none";
+            var usuarios = await firebase.Child("Users").OnceAsync<UserModel>();
+            foreach(var user in usuarios)
+            {
+                if (user.Object.email.Equals(email))
+                {
+                    buscado = user.Object;
+                    break;
+                }
+            }
+            return buscado;
+        }
         public async Task<List<UserModel>> getAllUsersOnceAsync()
         {
             List<UserModel> usuarios = new List<UserModel>();
@@ -83,21 +99,31 @@ namespace ProyectoFinalV1.Services
                 .Child("Opinions")
                 .PostAsync(opinion);
             await firebase.Child("Users")
-                .Child(user.UID)
+                .Child(user.username)
                 .Child("Opinions")
                 .PutAsync(opinion);
         }
         public async Task AddFriend(UserModel user,UserModel friend)
         {
             await firebase.Child("Users")
-                .Child(user.UID)
+                .Child(user.username)
                 .Child("Friends")
-                .PutAsync(new FriendModel().ID=friend.UID);
+                .PutAsync(new FriendModel().ID=friend.username);
         }
         #endregion
 
         #region Updates
-
+        public async Task UpdateDatosUser(UserModel user)
+        {
+            UpdateDatosUser update = new UpdateDatosUser() {
+                apellido = user.apellido,
+                nombre = user.nombre,
+                edad = user.edad,
+            };
+            await firebase.Child("Users")
+                .Child(user.username)
+                .PatchAsync(update);
+        }
         #endregion
 
         #region Deletes

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using ProyectoFinalV1.Models;
 using ProyectoFinalV1.Views;
+using ProyectoFinalV1.Views.InAppPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -69,8 +70,8 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         }
         public bool IsRefreshingTxt
         {
-            get { return this.isRunning; }
-            set { SetValue(ref this.isRunning, value); }
+            get { return this.isRefreshing; }
+            set { SetValue(ref this.isRefreshing, value); }
         }
         public bool IsRunningTxt
         {
@@ -156,21 +157,21 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                 case "enCines":
                     if (enCinesSelection != null)
                     {
-                        await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                        await App.Current.MainPage.Navigation.PushAsync(new Pelicula((PeliculaModel)enCinesSelection));
                     }
                     EnCinesSelection = null;
                     break;
                 case "pelisPopulares":
                     if (pelisPopularesSelection != null)
                     {
-                        await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                        await App.Current.MainPage.Navigation.PushAsync(new Pelicula((PeliculaModel)pelisPopularesSelection));
                     }
                     PelisPopularesSelection = null;
                     break;
                 case "topRated":
                     if (topRatedSelection != null)
                     {
-                        await App.Current.MainPage.Navigation.PushAsync(new AdminPage());
+                        await App.Current.MainPage.Navigation.PushAsync(new Pelicula((PeliculaModel)topRatedSelection));
                     }
                     TopRatedSelection = null;
                     break;
@@ -207,7 +208,7 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
             switch (nombreColeccion)
             {
                 case "pelisPopulares":
-                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,600);
+                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,500);
                     foreach (PeliculaModel peli in peliculasRequest)
                     {
                         bool exists = false;
@@ -227,7 +228,7 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                     paginaPelisPopulares++;
                     break;
                 case "topRated":
-                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,600);
+                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,500);
                     foreach (PeliculaModel peli in peliculasRequest)
                     {
                         bool exists = false;
@@ -255,14 +256,14 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
             switch (nombreColeccion)
             {
                 case "enCines":
-                    peliculasRequest = await App.tmdbProvider.getEnCines(500, 600);
+                    peliculasRequest = await App.tmdbProvider.getEnCines(500, 500);
                     foreach (PeliculaModel peli in peliculasRequest)
                     {
                         EnCinesItems.Add(peli);
                     }
                     break;
                 case "pelisPopulares":
-                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,600);
+                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,500);
                     foreach (PeliculaModel peli in peliculasRequest)
                     {
                         PelisPopularesItems.Add(peli);
@@ -270,7 +271,7 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                     paginaPelisPopulares++;
                     break;
                 case "topRated":
-                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,600);
+                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,500);
                     foreach (PeliculaModel peli in peliculasRequest)
                     {
                         TopRatedItems.Add(peli);

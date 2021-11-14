@@ -5,7 +5,9 @@
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
         <ScrollView>
-        <Grid RowSpacing="{OnPlatform iOS=25,Android=20}">
+        <Grid 
+            RowSpacing="{OnPlatform iOS=25,Android=20}"
+            BackgroundColor="SlateGray">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <!--1-->
@@ -34,9 +36,9 @@
                 <StackLayout Grid.Row="1" HorizontalOptions="Center">
                 <Label
                     Text="Registrarse"
-                            TextColor="Black"
+                            TextColor="white"
                             Font="Montserrat-Medium.otf"
-                            FontSize="{OnPlatform Android=20,iOS=23}"
+                            FontSize="30"
                             WidthRequest="300"
                     />
             </StackLayout>
@@ -44,14 +46,14 @@
             <StackLayout Grid.Row="2" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
                 <Label
                     Text="Email"
-                    FontSize="{OnPlatform Android=13}"
-                    TextColor="Black"
+                    FontSize="20"
+                    TextColor="White"
                     />
                 <Frame
                     HasShadow="{OnPlatform Android=true,iOS=false}"
                     Padding="{OnPlatform Android=6,iOS=0}"
                     CornerRadius="{OnPlatform Android=7}"
-                    >
+                    BackgroundColor="CadetBlue">
                     <Entry
                     Placeholder="ejemplo@correo.com"
                     Keyboard="Email"
@@ -67,15 +69,15 @@
 
                 <Label
                     Text="Contraseña"
-                    FontSize="{OnPlatform Android=13}"
-                    TextColor="Black"
+                    FontSize="20"
+                    TextColor="White"
                     />
 
                 <Frame
                      HasShadow="{OnPlatform Android=true,iOS=false}"
                      Padding="{OnPlatform Android=6,iOS=0}"
                     CornerRadius="{OnPlatform Android=7}"
-                     >
+                     BackgroundColor="CadetBlue">
 
                     <Entry
                     Placeholder="******************"
@@ -92,14 +94,14 @@
             <StackLayout Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
                 <Label
                     Text="Nombre de usuario"
-                    FontSize="{OnPlatform Android=13}"
-                    TextColor="Black"/>
+                    FontSize="20"
+                    TextColor="White"/>
 
                 <Frame
                     HasShadow="{OnPlatform Android=true,iOS=false}"
                     Padding="{OnPlatform Android=6,iOS=0}"
                     CornerRadius="{OnPlatform Android=7}"
-                    >
+                    BackgroundColor="CadetBlue">
 
                     <Entry
                 Placeholder="Jens"
@@ -115,14 +117,14 @@
                 <StackLayout Grid.Row="5" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
                 <Label
                      Text="Nombre"
-                     FontSize="{OnPlatform Android=13}"
-                     TextColor="Black"/>
+                     FontSize="20"
+                     TextColor="White"/>
 
                 <Frame
                      HasShadow="{OnPlatform Android=true,iOS=false}"
                      Padding="{OnPlatform Android=6,iOS=0}"
                      CornerRadius="{OnPlatform Android=7}"
-                     >
+                     BackgroundColor="CadetBlue">
 
                     <Entry
                     Placeholder="Jens"
@@ -138,14 +140,14 @@
                 <StackLayout Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
                     <Label
                      Text="Apellido"
-                     FontSize="{OnPlatform Android=13}"
-                     TextColor="Black"/>
+                     FontSize="20"
+                     TextColor="White"/>
 
                     <Frame
                      HasShadow="{OnPlatform Android=true,iOS=false}"
                      Padding="{OnPlatform Android=6,iOS=0}"
                      CornerRadius="{OnPlatform Android=7}"
-                     >
+                     BackgroundColor="CadetBlue">
 
                         <Entry
                     Placeholder="Bergensten"
@@ -163,14 +165,14 @@
 
                     <Label
                      Text="Edad"
-                     FontSize="{OnPlatform Android=13}"
-                     TextColor="Black"/>
+                     FontSize="20"
+                     TextColor="White"/>
 
                     <Frame
                      HasShadow="{OnPlatform Android=true,iOS=false}"
                      Padding="{OnPlatform Android=6,iOS=0}"
                      CornerRadius="{OnPlatform Android=7}"
-                     >
+                     BackgroundColor="CadetBlue">
 
                         <Entry
                     Placeholder=""
@@ -198,26 +200,26 @@
             </StackLayout>
 
 
-            <StackLayout Grid.Row="9" HorizontalOptions="Center" Orientation="Vertical" >
+            <StackLayout Grid.Row="9" HorizontalOptions="Center" Orientation="Vertical">
                 <Button
                      Text="Registrarse"
-                            TextColor="Black"
-                            Font="Montserrat-Medium.otf"
-                            FontSize="{OnPlatform Android=15}"
-                            BackgroundColor="#fcfcfc"
-                            BorderColor="#f2f2f2"
-                            BorderWidth="1.5"
-                            WidthRequest="300"
-                            HeightRequest="50"
-                            CornerRadius="7"
-                            Command="{Binding RegisterCommand}"
-                            IsEnabled="{Binding IsEnabledTxt, Mode=TwoWay}"
-                    />
+                        TextColor="White"
+                        Font="Montserrat-Medium.otf"
+                        FontSize="20"
+                        BackgroundColor="CadetBlue"
+                        BorderColor="#f2f2f2"
+                        BorderWidth="1.5"
+                        WidthRequest="300"
+                        HeightRequest="50"
+                        CornerRadius="7"
+                        Command="{Binding RegisterCommand}"
+                        IsEnabled="{Binding IsEnabledTxt, Mode=TwoWay}"
+                />
                 <Button
                             Text="¿Ya tenés cuenta? Inicia Sesión"
-                            TextColor="{OnPlatform iOS=Black}"
-                            FontSize="{OnPlatform Android=11,iOS=12}"
-                            BackgroundColor="White"
+                            TextColor="White"
+                            FontSize="15"
+                            BackgroundColor="CadetBlue"
                             Clicked="Login_Clicked"
                             />
 

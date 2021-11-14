@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using Firebase.Database;
+using ProyectoFinalV1.Models;
 using ProyectoFinalV1.Services;
 using ProyectoFinalV1.Views;
 using System;
@@ -12,6 +13,7 @@ namespace ProyectoFinalV1
     {
         public static FirebaseProvider firebaseBDD;
         public static FirebaseAuthProvider firebaseAuth;
+        public static UserModel usuarioLogeado;
         public static PeliculasProvider tmdbProvider;
         private string WebAPIkey = "AIzaSyB_W2TRS2rCXcjfY3UAswlKKP_t_I5IKY0";
         public static FirebaseAuthLink autenticacion;
