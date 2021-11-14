@@ -12,6 +12,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -35,7 +36,7 @@
                         <Entry
                             BackgroundColor="CadetBlue"
                             Text="{Binding UserNameTxt}"
-                            IsEnabled="{Binding IsEnabledTxt}"/>
+                            IsEnabled="False"/>
                     </Frame>
                     
                 </StackLayout>
@@ -56,8 +57,8 @@
                         CornerRadius="20">
                             <Entry
                             BackgroundColor="CadetBlue"
-                            Text="{Binding EmailTxt}"
-                            IsEnabled="{Binding IsEnabledTxt}"/>
+                            Text="{Binding EmailTxt, Mode=TwoWay}"
+                            IsEnabled="false"/>
                         </Frame>
 
                     </StackLayout>
@@ -78,7 +79,7 @@
                     CornerRadius="20">
                         <Entry
                         BackgroundColor="CadetBlue"
-                        Text="{Binding NombreTxt}"
+                        Text="{Binding NombreTxt, Mode=TwoWay}"
                         IsEnabled="{Binding IsEnabledTxt}"/>
                     </Frame>
 
@@ -100,7 +101,7 @@
                             CornerRadius="20">
                             <Entry
                                 BackgroundColor="CadetBlue"
-                                Text="{Binding NombreTxt}"
+                                Text="{Binding ApellidoTxt,Mode=TwoWay}"
                                 IsEnabled="{Binding IsEnabledTxt}"/>
                         </Frame>
                     </StackLayout>
@@ -121,20 +122,86 @@
                             CornerRadius="20">
                             <Entry
                                 BackgroundColor="CadetBlue"
-                                Text="{Binding NombreTxt}"
+                                TextColor="White"
+                                PlaceholderColor="White"
+                                Text="{Binding EdadTxt,Mode=TwoWay}"
                                 IsEnabled="{Binding IsEnabledTxt}"/>
                         </Frame>
                     </StackLayout>
             </Frame>
-                <StackLayout Grid.Row="5" HorizontalOptions="CenterAndExpand">
-                <Button Text="Cambiar datos"></Button>
-            </StackLayout>
 
-            <StackLayout Grid.Row="6" VerticalOptions="End" Padding="20">
-                <Button Text="Cerrar Sesion"></Button>
+                <StackLayout Grid.Row="5" Orientation="Horizontal" HorizontalOptions="Center" Padding="0" HeightRequest="50">
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Azure"
+                        CornerRadius="20"
+                        IsVisible="{Binding IsVisibleTxt}">
+                            <Button
+                            Text="Enviar Cambios"
+                            BackgroundColor="Transparent"
+                            Command="{Binding EnviarCambiosCommand}"/>
+                    </Frame>
+                    <ActivityIndicator
+                        IsRunning="{Binding IsRunningTxt}"
+                        IsVisible="{Binding IsVisibleTxt}"
+                        Color="Blue"
+                        BackgroundColor="Transparent"
+                        Scale="0.8" />
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Azure"
+                        CornerRadius="20"
+                        IsVisible="{Binding IsVisibleTxt}">
+                        <Button
+                            Text="Cancelar"
+                            BackgroundColor="Transparent"
+                            Command="{Binding CancelarCambiosCommand}"/>
+                    </Frame>
+                </StackLayout>
 
+
+                <StackLayout
+                    Grid.Row="6"
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="0"
+                    HeightRequest="50">
+                <Frame
+                    Padding="0"
+                    Margin="0"
+                    BackgroundColor="Azure"
+                    CornerRadius="20">
+                    <Button
+                        Text="Cambiar datos"
+                        BackgroundColor="Transparent"
+                        Command="{Binding CambiarDatosCommand}"/>
+                </Frame>
+                    <Frame
+                    Padding="0"
+                    Margin="0"
+                    BackgroundColor="Black"
+                    CornerRadius="20">
+                        <Button
+                        Text="Cambiar Contraseña"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        Command="{Binding CambiarPassCommand}"/>
+                    </Frame>
+                    
             </StackLayout>
-        </Grid>
+                <Frame
+                    Grid.Row="7"
+                    Padding="0"
+                    Margin="40,0,40,20"
+                    BackgroundColor="DarkRed"
+                    CornerRadius="20">
+                    <Button
+                        Text="Cerrar Sesión"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        Command="{Binding LogoutCommand}"/>
+                </Frame>
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

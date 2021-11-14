@@ -36,7 +36,7 @@
     <EmbeddedResource Update="Views\InAppPages\AmigosPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\InAppPages\ConfiguracionPage .xaml">
+    <EmbeddedResource Update="Views\InAppPages\ConfiguracionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\InAppPages\Pelicula.xaml">
@@ -67,6 +67,12 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\InAppPages\ConfiguracionPage.xaml.cs">
+      <DependentUpon>ConfiguracionPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 

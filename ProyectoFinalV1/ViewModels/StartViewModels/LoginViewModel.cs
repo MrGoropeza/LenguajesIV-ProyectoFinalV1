@@ -1,6 +1,7 @@
 ﻿using Firebase.Auth;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using ProyectoFinalV1.Models;
 using ProyectoFinalV1.Views;
 using ProyectoFinalV1.Views.InAppPages;
 using System;
@@ -84,7 +85,11 @@ namespace ProyectoFinalV1.ViewModels
             try
             {
                 App.autenticacion = await App.firebaseAuth.SignInWithEmailAndPasswordAsync(EmailTxt.ToString(), PasswordTxt.ToString());
-                
+                UserModel logeado = await App.firebaseBDD.getUserByEmail(this.email);
+                if (logeado.email != "none")
+                {
+                    App.usuarioLogeado = logeado;
+                }
                 await Application.Current.MainPage.Navigation.PushAsync(new PrincipalTabbedPage());
             }
             catch (Exception ex)

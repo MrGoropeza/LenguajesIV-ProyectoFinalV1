@@ -5,7 +5,8 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <ScrollView>
-            <Grid>
+            <Grid
+                BackgroundColor="SlateGray">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="90"/>
                     <RowDefinition Height="Auto"/>
@@ -23,15 +24,15 @@
                          Text="Recuperar Constraseña"
                          FontAttributes="Bold"
                          HorizontalOptions="Center"
-                         FontSize="26"
+                         FontSize="28"
                          Margin="0,0,0,5"
                          WidthRequest="300"
-                         TextColor="{OnPlatform Android=Black}"
+                         TextColor="White"
                          />
                     <Label
                     Text="Escribe el correo de tu cuenta"
-                            TextColor="Black"
-                            FontSize="15"
+                            TextColor="White"
+                            FontSize="20"
                             WidthRequest="300"
                     />
                 </StackLayout>
@@ -42,7 +43,7 @@
                     HasShadow="{OnPlatform Android=true,iOS=false}"
                     Padding="{OnPlatform Android=8,iOS=0}"
                     CornerRadius="{OnPlatform Android=7}"
-                    >
+                    BackgroundColor="CadetBlue">
                         <Entry
                     Placeholder="ejemplo@correo.com"
                     Keyboard="Email"
@@ -58,7 +59,7 @@
                     <ActivityIndicator
                        IsRunning="{Binding IsRunningTxt}"
                        IsVisible="{Binding IsVisibleTxt}"
-                       Color="Black"
+                       Color="Blue"
                        Scale="0.8"
                      
                        />
@@ -71,7 +72,7 @@
                              FontSize="{OnPlatform Android=13}"
                              WidthRequest="150"
                              HorizontalOptions="End"
-                             BackgroundColor="White"
+                             BackgroundColor="CadetBlue"
                              HeightRequest="50"
                              Padding="0"
                              IsEnabled="{Binding IsEnabledTxt}"
@@ -83,7 +84,7 @@
                              FontSize="{OnPlatform Android=13}"
                              WidthRequest="150"
                              HorizontalOptions="End"
-                             BackgroundColor="White"
+                             BackgroundColor="CadetBlue"
                              HeightRequest="50"
                              Padding="0"
                              IsEnabled="{Binding IsEnabledTxt}"

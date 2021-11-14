@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoFinalV1.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ProyectoFinalV1.Views
         public RegisterPage()
         {
             InitializeComponent();
+            BindingContext = new RegisterViewModel();
         }
         private async void Login_Clicked(object sender, EventArgs e)
         {

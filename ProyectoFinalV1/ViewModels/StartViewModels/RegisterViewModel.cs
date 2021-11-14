@@ -41,7 +41,7 @@ namespace ProyectoFinalV1.ViewModels
             get { return this.password; }
             set { SetValue(ref this.password, value); }
         }
-        public string UsernameTxt
+        public string UserNameTxt
         {
             get { return this.username; }
             set { SetValue(ref this.username, value); }
@@ -94,7 +94,7 @@ namespace ProyectoFinalV1.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter an email.",
+                    "Debes ingresar un nombre de usuario",
                     "Accept");
                 return;
             }
@@ -112,7 +112,7 @@ namespace ProyectoFinalV1.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter an email.",
+                    "Debes ingresar un correo.",
                     "Accept");
                 return;
             }
@@ -121,7 +121,7 @@ namespace ProyectoFinalV1.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter a password.",
+                    "Debes ingresar una contraseña.",
                     "Accept");
                 return;
             }
@@ -129,7 +129,7 @@ namespace ProyectoFinalV1.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter a name.",
+                    "Debes ingresar tu nombre.",
                     "Accept");
                 return;
             }
@@ -137,7 +137,7 @@ namespace ProyectoFinalV1.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "You must enter an age.",
+                    "Debes ingresar tu edad.",
                     "Accept");
                 return;
             }
@@ -161,6 +161,7 @@ namespace ProyectoFinalV1.ViewModels
                 nuevoUsuario.edad = this.edad;
                 nuevoUsuario.nombre = this.nombre;
                 nuevoUsuario.username = this.username;
+                nuevoUsuario.email = this.email;
                 await App.firebaseBDD.AddUser(nuevoUsuario);
                 this.isInserted = true;
                 IsRunningTxt = false;
