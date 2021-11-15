@@ -27,7 +27,7 @@ namespace ProyectoFinalV1.Views
             BindingContext = new PeliculasProvider();
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
         {
             
         }

@@ -14,6 +14,41 @@ namespace ProyectoFinalV1.Services
     public class FirebaseProvider
     {
         #region Selects
+        public async Task<List<OpinionModel>> getOpinionesOfMovie(int movieID)
+        {
+            List<OpinionModel> opiniones = new List<OpinionModel>();
+            var request = await firebase
+                .Child("Opinions")
+                .Child(movieID.ToString())
+                .OnceAsync<OpinionModel>();
+            
+            foreach(var op in request)
+            {
+                opiniones.Add(new OpinionModel() { 
+                    fechaOpinion=op.Object.fechaOpinion,
+                    id=op.Key,
+                    movieID=op.Object.movieID,
+                    opinionTXT=op.Object.opinionTXT,
+                    username=op.Object.username,
+                });
+            }
+            return opiniones;
+        }
+        public async Task<UserModel> getUserByUsername(string username)
+        {
+            UserModel buscado = new UserModel();
+            buscado.username = null;
+            var usuarios = await firebase.Child("Users").OnceAsync<UserModel>();
+            foreach (var user in usuarios)
+            {
+                if (user.Object.username.Equals(username))
+                {
+                    buscado = user.Object;
+                    break;
+                }
+            }
+            return buscado;
+        }
         public async Task<UserModel> getUserByEmail(string email)
         {
             UserModel buscado = new UserModel();
@@ -93,15 +128,21 @@ namespace ProyectoFinalV1.Services
                 .Child("Class")
                 .PostAsync(clase);
         }
-        public async Task AddOpinion(OpinionModel opinion, UserModel user)
+        public async Task<string> AddOpinion(OpinionModel opinion,UserModel user)
         {
-            var op = await firebase
+            var opinionMandada = await firebase
                 .Child("Opinions")
+                .Child(opinion.movieID.ToString())
                 .PostAsync(opinion);
-            await firebase.Child("Users")
+            InsertOpinionUser inserOp = new InsertOpinionUser();
+            inserOp.movieID = opinion.movieID;
+            await firebase
+                .Child("Users")
                 .Child(user.username)
-                .Child("Opinions")
-                .PutAsync(opinion);
+                .Child("Opiniones")
+                .Child(opinionMandada.Key)
+                .PutAsync(opinion.movieID);
+            return opinionMandada.Key;
         }
         public async Task AddFriend(UserModel user,UserModel friend)
         {

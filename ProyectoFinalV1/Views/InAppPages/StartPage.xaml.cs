@@ -14,11 +14,17 @@ namespace ProyectoFinalV1.Views.InAppPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartPage : ContentPage
     {
+        private StartViewModel contexto;
         public StartPage()
         {
             InitializeComponent();
-            BindingContext = new StartViewModel();
+            this.contexto = new StartViewModel();
+            BindingContext = contexto;
         }
 
+        private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SearchMovie(contexto.BusquedaTxt));
+        }
     }
 }

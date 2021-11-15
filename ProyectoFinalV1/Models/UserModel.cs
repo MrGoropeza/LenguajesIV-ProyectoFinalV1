@@ -13,7 +13,7 @@ namespace ProyectoFinalV1.Models
         public string edad { get; set; }
         public Dictionary<string, string> friends { get; set; }
         public Dictionary<string, string> likes { get; set; }
-        public Dictionary<string, string> opiniones { get; set; }
+        public Dictionary<string, string> Opiniones { get; set; }
         public Dictionary<string, string> clases { get; set; }
     }
 }

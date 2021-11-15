@@ -25,6 +25,9 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         private int paginaTopRated;
         public object topRatedSelection;
 
+        public string busqueda;
+
+
         public int itemTreshold;
         public bool isRefreshing;
         public bool isRunning;
@@ -33,6 +36,11 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         #endregion
 
         #region Propiedades
+        public string BusquedaTxt
+        {
+            get { return this.busqueda; }
+            set { SetValue(ref this.busqueda, value); }
+        }
         public ObservableCollection<PeliculaModel> EnCinesItems
         {
             get { return this.enCinesCollection; }
@@ -253,32 +261,40 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         private async Task LlenarColeccion(string nombreColeccion)
         {
             List<PeliculaModel> peliculasRequest = new List<PeliculaModel>();
-            switch (nombreColeccion)
+            try
             {
-                case "enCines":
-                    peliculasRequest = await App.tmdbProvider.getEnCines(500, 500);
-                    foreach (PeliculaModel peli in peliculasRequest)
-                    {
-                        EnCinesItems.Add(peli);
-                    }
-                    break;
-                case "pelisPopulares":
-                    peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares,500,500);
-                    foreach (PeliculaModel peli in peliculasRequest)
-                    {
-                        PelisPopularesItems.Add(peli);
-                    }
-                    paginaPelisPopulares++;
-                    break;
-                case "topRated":
-                    peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated,500,500);
-                    foreach (PeliculaModel peli in peliculasRequest)
-                    {
-                        TopRatedItems.Add(peli);
-                    }
-                    paginaTopRated++;
-                    break;
+                switch (nombreColeccion)
+                {
+                    case "enCines":
+                        peliculasRequest = await App.tmdbProvider.getEnCines(500, 500);
+                        foreach (PeliculaModel peli in peliculasRequest)
+                        {
+                            EnCinesItems.Add(peli);
+                        }
+                        break;
+                    case "pelisPopulares":
+                        peliculasRequest = await App.tmdbProvider.getPopulares(paginaPelisPopulares, 500, 500);
+                        foreach (PeliculaModel peli in peliculasRequest)
+                        {
+                            PelisPopularesItems.Add(peli);
+                        }
+                        paginaPelisPopulares++;
+                        break;
+                    case "topRated":
+                        peliculasRequest = await App.tmdbProvider.getTopRated(paginaTopRated, 500, 500);
+                        foreach (PeliculaModel peli in peliculasRequest)
+                        {
+                            TopRatedItems.Add(peli);
+                        }
+                        paginaTopRated++;
+                        break;
+                }
             }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error",e.Message,"Aceptar");
+            }
+            
         }
         #endregion
 

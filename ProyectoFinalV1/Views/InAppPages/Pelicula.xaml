@@ -5,12 +5,12 @@
              NavigationPage.HasNavigationBar="true"
              Title="{Binding TitleTxt}">
     <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsRefreshingTxt}"
+                     Command="{Binding RefreshCommand}">
         <ScrollView>
             <Grid
                 BackgroundColor="SlateGray">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -30,21 +30,87 @@
                         HeightRequest="240" />
                 </StackLayout>
                 <Frame Grid.Row="1" Padding="10" Margin="10,5,10,0" BackgroundColor="CadetBlue" CornerRadius="20">
-                    <StackLayout >
-                        <Label Text="Calificacion:"  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="Fecha de Estreno: "  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="Opinion Popular"  TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                    <StackLayout Margin="10">
+                        <Label Text="{Binding FechaEstrenoTxt}"  TextColor="White" FontAttributes="Bold" FontSize="20"/>
+                        <Label Text="{Binding PopularidadTxt}"  TextColor="White" FontAttributes="Bold" FontSize="20"/>
+                        <Label Text="{Binding MediaVotosTxt}"  TextColor="White" FontAttributes="Bold" FontSize="20"/>
+                        <Label Text="{Binding CantVotosTxt}"  TextColor="White" FontAttributes="Bold" FontSize="20"/>
                     </StackLayout>
                 </Frame>
 
                 <Frame Grid.Row="2" Padding="10" Margin="10,5,10,0" BackgroundColor="CadetBlue" CornerRadius="20">
-                    <StackLayout HorizontalOptions="Center" Margin="10"
-                         HeightRequest="200">
-                        <Label Text="Descripcion" TextColor="Black" FontSize="20"></Label>
+                    <StackLayout Margin="10">
+                        <Label Text="Descripcion" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="{Binding OverViewTxt}" TextColor="White" FontSize="20"/>
                     </StackLayout>
+                </Frame>
+
+                <Frame 
+                    Grid.Row="3"
+                    CornerRadius="20"
+                    Margin="10,5,10,0"
+                    Padding="5"
+                    BackgroundColor="CadetBlue">
+                    <Entry
+                        Keyboard="Chat"
+                        Placeholder="Acá podés escribir tu opinión"
+                        PlaceholderColor="White"
+                        Text="{Binding EntradaUsuarioTxt,Mode=TwoWay}"
+                        Completed="Entry_Completed"/>
+                </Frame>
+
+                <Frame 
+                    Grid.Row="4"
+                    CornerRadius="20"
+                    Margin="10, 5, 10, 10"
+                    Padding="10"
+                    HeightRequest="400"
+                    BackgroundColor="CadetBlue">
+                    <StackLayout>
+                        <Label
+                            Text="Opiniones de otros usuarios:"
+                            TextColor="White"
+                            FontSize="20"/>
+                        <Label
+                            Text="Aún no hay opiniones de otros usuarios. ¡Animate a ser el primero!"
+                            TextColor="White"
+                            FontSize="15"
+                            IsVisible="{Binding IsVisibleTxt}"/>
+                            <CollectionView 
+                                ItemsSource="{Binding OpinionesItems}"
+                                IsVisible="{Binding HayOpinionesTxt}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <Label
+                                                Text="{Binding FechaOpinionTxt}"
+                                                TextColor="White"
+                                                Margin="5,0,5,0"/>
+                                            <Label
+                                                Text="{Binding NombreUsuarioTxt}"
+                                                TextColor="White"
+                                                Margin="5,0,5,0"/>
+                                            <Label
+                                                Text="{Binding opinionTXT}"
+                                                TextColor="White"
+                                                FontAttributes="Italic"
+                                                Margin="10,0,10,0"/>
+                                            <Line
+                                                BackgroundColor="White"
+                                                HeightRequest="1"
+                                                Margin="0,10"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
                 </Frame>
 
             </Grid>
         </ScrollView>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

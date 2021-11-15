@@ -1,5 +1,4 @@
-﻿using ProyectoFinalV1.Models;
-using ProyectoFinalV1.ViewModels.InAppViewModels;
+﻿using ProyectoFinalV1.ViewModels.InAppViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +11,20 @@ using Xamarin.Forms.Xaml;
 namespace ProyectoFinalV1.Views.InAppPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Pelicula : ContentPage
+    public partial class SearchMovie : ContentPage
     {
-        PeliViewModel contexto;
-        public Pelicula(PeliculaModel pelicula)
+        SearchMovieViewModel contexto;
+        public SearchMovie(string busqueda)
         {
             InitializeComponent();
-            contexto = new PeliViewModel(pelicula);
+            contexto = new SearchMovieViewModel();
+            contexto.BusquedaTxt = busqueda;
             BindingContext = contexto;
         }
 
-        private void Entry_Completed(object sender, EventArgs e)
+        private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
         {
-            contexto.EnviarOpinionMethod();
+            
         }
     }
 }

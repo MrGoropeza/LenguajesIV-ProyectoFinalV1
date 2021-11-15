@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.InAppPages.SearchMovie"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout 
+            BackgroundColor="SlateGray">
+            <Frame 
+                CornerRadius="20"
+                Margin="10, 10, 10, 10"
+                Padding="0"
+                BackgroundColor="CadetBlue">
+                    <SearchBar
+                        x:Name="searchBar"
+                        CancelButtonColor="White"
+                        PlaceholderColor="White"
+                        TextColor="White"
+                        Placeholder="Buscar películas"
+                        Text="{Binding BusquedaTxt,Mode=TwoWay}"
+                        SearchCommand="{Binding BuscarCommand}"
+                        />
+            </Frame>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunningTxt}"
+                IsVisible="{Binding IsVisibleTxt}"
+                Color="Blue"
+                Scale="0.8"/>
+            <ScrollView>
+                <Frame 
+                    CornerRadius="20"
+                    Margin="10, 5, 10, 10"
+                    Padding="10"
+                    HeightRequest="550"
+                    BackgroundColor="CadetBlue">
+                    <StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                Text="Resultados de: "
+                                TextColor="White"
+                                FontSize="20"/>
+                            <Label
+                                Text="{Binding BusquedaTxt,Mode=TwoWay}"
+                                TextColor="White"
+                                FontSize="20"/>
+                        </StackLayout>
+                        <Label
+                            Text="No se encontraron resultados :C"
+                            TextColor="White"
+                            FontSize="20"
+                            IsVisible="{Binding NoHayResultadosTxt}"/>
+                        <CollectionView 
+                            ItemsSource="{Binding SearchItems}"
+                            RemainingItemsThresholdReachedCommand="{Binding ActualizarBusquedaCommand}"
+                            RemainingItemsThreshold="{Binding ItemTreshold}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding BusquedaSelectCommand}"
+                            SelectedItem="{Binding BusquedaSelection}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Margin="0,0,0,15">
+                                        <Image
+                                            Source="{Binding imageUrl}"
+                                            HeightRequest="100"/>
+                                        <StackLayout
+                                            VerticalOptions="Center">
+                                            <Label
+                                                Text="{Binding title}"
+                                                TextColor="White"
+                                                FontSize="20"/>
+                                            <Label
+                                                Text="{Binding originalTitle}"
+                                                TextColor="White"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

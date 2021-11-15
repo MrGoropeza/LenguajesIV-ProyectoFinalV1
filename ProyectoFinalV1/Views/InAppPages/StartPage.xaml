@@ -43,7 +43,9 @@
                         CancelButtonColor="White"
                         PlaceholderColor="White"
                         TextColor="White"
-                        Placeholder="Buscar películas"/>
+                        Placeholder="Buscar películas"
+                        Text="{Binding BusquedaTxt,Mode=TwoWay}"
+                        SearchButtonPressed="SearchBar_SearchButtonPressed"/>
                 </Frame>
                 
                 
@@ -189,7 +191,7 @@
                                 RemainingItemsThreshold="{Binding ItemTreshold}"
                                 SelectionMode="Single"
                                 SelectionChangedCommand="{Binding TopRatedSelectCommand}"
-                                SelectedItem="{Binding TopRatedSelection}">>
+                                SelectedItem="{Binding TopRatedSelection}">
                                 <CollectionView.ItemsLayout>
                                     <LinearItemsLayout Orientation="Horizontal"/>
                                 </CollectionView.ItemsLayout>
