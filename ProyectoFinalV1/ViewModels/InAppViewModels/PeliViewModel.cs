@@ -129,6 +129,15 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                     item.FechaOpinionTxt = item.fechaOpinion.ToString("dd/MM/yyyy - HH:mm") + ":";
                     UserModel usuario = await App.firebaseBDD.getUserByUsername(item.username);
                     item.NombreUsuarioTxt = usuario.nombre + " " + usuario.apellido + ":";
+                    var imageRequest = await App.firebaseBDD.getImageUrlFromUser(item.username);
+                    if (imageRequest.Equals("none"))
+                    {
+                        item.imageUrl = "defaultUser.png";
+                    }
+                    else
+                    {
+                        item.imageUrl = imageRequest;
+                    }
                     bool exists = false;
                     foreach (var opinion in opinionesCollection)
                     {

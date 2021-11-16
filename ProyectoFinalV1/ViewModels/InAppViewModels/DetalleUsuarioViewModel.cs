@@ -106,6 +106,7 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         {
             IsRefreshingTxt = true;
             await analizarSituacionConUsuario();
+            actual = await App.firebaseBDD.getUserByUsername(actual.username);
             await Task.Delay(1000);
             IsRefreshingTxt = false;
         }
@@ -215,7 +216,7 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
             ImageUrl = actualUser.imageUrl;
             UsernameTxt = actualUser.username;
             NomTxt = actualUser.nomYapel;
-            EdadTxt = actualUser.edad;
+            EdadTxt = "Edad: " + actualUser.edad;
             RefreshMethod();
         }
         #endregion

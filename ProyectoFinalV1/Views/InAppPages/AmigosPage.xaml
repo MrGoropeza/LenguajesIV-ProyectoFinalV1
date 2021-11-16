@@ -51,19 +51,21 @@
                                 <DataTemplate>
                                     <StackLayout
                                         Orientation="Horizontal"
-                                        Margin="0,0,0,15">
+                                        Margin="0,0,0,20">
                                         <Image
                                             Source="{Binding imageUrl}"
-                                            HeightRequest="100"/>
+                                            HeightRequest="100"
+                                            Aspect="AspectFill"/>
                                         <StackLayout
                                             VerticalOptions="Center">
                                             <Label
                                                 Text="{Binding nomYapel}"
                                                 TextColor="White"
-                                                FontSize="20"/>
+                                                FontSize="25"/>
                                             <Label
                                                 Text="{Binding username}"
-                                                TextColor="White"/>
+                                                TextColor="White"
+                                                FontSize="20"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </DataTemplate>

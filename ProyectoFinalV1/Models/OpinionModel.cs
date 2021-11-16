@@ -9,6 +9,7 @@ namespace ProyectoFinalV1.Models
         public int movieID { get; set; }
         public string opinionTXT { get; set; }
         public string username { get; set; }
+        public string imageUrl { get; set; }
         public DateTime fechaOpinion { get; set; }
         public string id{ get; set; }
         public string FechaOpinionTxt { get; set; }
