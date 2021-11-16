@@ -1,10 +1,12 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
+using Firebase.Storage;
 using ProyectoFinalV1.Models;
 using ProyectoFinalV1.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,22 @@ namespace ProyectoFinalV1.Services
     public class FirebaseProvider
     {
         #region Selects
+        public async Task<string> getImageUrlFromUser(string username)
+        {
+            string imageUrl;
+            try
+            {
+                imageUrl = await firebaseStorage
+                .Child("perfiles")
+                .Child(username + ".jpg")
+                .GetDownloadUrlAsync();
+            }
+            catch
+            {
+                imageUrl = "none";
+            }
+            return imageUrl;
+        }
         public async Task<List<FriendModel>> getAmigosFriendModelOnceAsync(string username)
         {
             List<FriendModel> amigos = new List<FriendModel>();
@@ -179,6 +197,15 @@ namespace ProyectoFinalV1.Services
         #endregion
 
         #region Inserts
+        public async Task<string> AddProfilePicToUser(string username, Stream imagen)
+        {
+            var storageImage = await firebaseStorage
+                .Child("perfiles")
+                .Child(username+".jpg")
+                .PutAsync(imagen);
+            string imgurl = storageImage;
+            return imgurl;
+        }
         public async Task AddUser(UserModel user)
         {
             await firebase
@@ -282,10 +309,12 @@ namespace ProyectoFinalV1.Services
         }
         #endregion
 
-        static FirebaseClient firebase = new FirebaseClient("https://proyecto-final-lenguajes-4-default-rtdb.firebaseio.com/");
+        static FirebaseClient firebase;
+        static FirebaseStorage firebaseStorage;
         public FirebaseProvider()
         {
-            
+            firebase = new FirebaseClient("https://proyecto-final-lenguajes-4-default-rtdb.firebaseio.com/");
+            firebaseStorage = new FirebaseStorage("proyecto-final-lenguajes-4.appspot.com");
         }
     }
 }

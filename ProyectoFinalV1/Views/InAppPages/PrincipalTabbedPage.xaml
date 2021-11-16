@@ -2,7 +2,7 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="ProyectoFinalV1.Views.InAppPages.PrincipalTabbedPage"
-            xmlns:locals="clr-namespace:ProyectoFinalV1.Views.InAppPages"
+            xmlns:locals="clr-namespace:ProyectoFinalV1.Views.InAppPages" xmlns:locals1="clr-namespace:ProyectoFinalV1.Views"
             NavigationPage.HasNavigationBar="False"
             
             Title="{Binding TitleTxt}"

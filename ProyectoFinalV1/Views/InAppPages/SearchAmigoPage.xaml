@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalV1.Views.InAppPages.SearchAmigoPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="True"
+             Title="Buscar Personas">
     <ContentPage.Content>
         <StackLayout 
             BackgroundColor="SlateGray">
@@ -62,9 +63,15 @@
                                     <StackLayout
                                         Orientation="Horizontal"
                                         Margin="0,0,0,15">
-                                        <Image
+                                        <Frame
+                                            Padding="0"
+                                            HeightRequest="80"
+                                            WidthRequest="100"
+                                            CornerRadius="20">
+                                            <Image
                                             Source="{Binding imageUrl}"
-                                            HeightRequest="100"/>
+                                            Aspect="AspectFill"/>
+                                        </Frame>
                                         <StackLayout
                                             VerticalOptions="Center">
                                             <Label

@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using ProyectoFinalV1.Views.InAppPages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         public string nombre;
         public string apellido;
         public string edad;
+        private string imageUrl;
 
         public bool isVisible;
         public bool isRunning;
@@ -45,6 +47,11 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         {
             get { return this.edad; }
             set { SetValue(ref this.edad, value); }
+        }
+        public string ImageUrl
+        {
+            get { return this.imageUrl; }
+            set { SetValue(ref this.imageUrl, value); }
         }
         public bool IsVisibleTxt
         {
@@ -91,6 +98,13 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                 return new RelayCommand(CambiarPassMethod);
             }
         }
+        public ICommand CambiarFotoCommand
+        {
+            get
+            {
+                return new RelayCommand(CambiarFotoMethod);
+            }
+        }
         public ICommand LogoutCommand
         {
             get
@@ -100,6 +114,10 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         }
         #endregion
         #region Metodos
+        private async void CambiarFotoMethod()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new CambiarFotoPage());
+        }
         private void CambiarDatosMethod()
         {
             IsEnabledTxt = true;
@@ -149,13 +167,14 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
         {
             await App.Current.MainPage.Navigation.PopToRootAsync();
         }
-        private void LlenarDatosFromServer()
+        private async void LlenarDatosFromServer()
         {
             UserNameTxt = App.usuarioLogeado.username;
             EmailTxt = App.usuarioLogeado.email;
             NombreTxt = App.usuarioLogeado.nombre;
             ApellidoTxt = App.usuarioLogeado.apellido;
             EdadTxt = App.usuarioLogeado.edad;
+            ImageUrl = await App.firebaseBDD.getImageUrlFromUser(App.usuarioLogeado.username);
         }
         #endregion
         #region Constructor

@@ -79,6 +79,15 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                 foreach(UserModel amigo in request)
                 {
                     amigo.nomYapel = amigo.nombre + " " + amigo.apellido;
+                    var imageRequest = await App.firebaseBDD.getImageUrlFromUser(amigo.username);
+                    if (imageRequest.Equals("none"))
+                    {
+                        amigo.imageUrl = "defaultUser.png";
+                    }
+                    else
+                    {
+                        amigo.imageUrl = imageRequest;
+                    }
                     AmigosItems.Add(amigo);
                 }
             }
@@ -92,8 +101,8 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
             IsRefreshingTxt = true;
             IsVisibleTxt = true;
             AmigosItems.Clear();
-            await Task.Delay(1000);
             LlenarAmigos();
+            await Task.Delay(1000);
             IsRefreshingTxt = false;
             IsVisibleTxt = false;
         }

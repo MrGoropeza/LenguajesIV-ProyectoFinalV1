@@ -94,6 +94,8 @@ namespace ProyectoFinalV1.ViewModels
                 UserModel logeado = await App.firebaseBDD.getUserByEmail(this.email);
                 if (logeado.email != "none")
                 {
+                    string imageUrl = await App.firebaseBDD.getImageUrlFromUser(logeado.username);
+                    logeado.imageUrl = imageUrl;
                     App.usuarioLogeado = logeado;
                 }
                 await Application.Current.MainPage.Navigation.PushAsync(new PrincipalTabbedPage());

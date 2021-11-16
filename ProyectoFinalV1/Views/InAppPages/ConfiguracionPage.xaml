@@ -4,23 +4,9 @@
              x:Class="ProyectoFinalV1.Views.InAppPages.ConfiguracionPage">
     <ContentPage.Content>
         <ScrollView>
-        <Grid BackgroundColor="SlateGray" RowSpacing="25">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Frame
-                Grid.Row="0"
+            <StackLayout
+                BackgroundColor="SlateGray">
+                <Frame
                 Padding="10"
                 Margin="20, 30, 20, 0"
                 BackgroundColor="Azure"
@@ -42,7 +28,6 @@
                 </StackLayout>
             </Frame>
                 <Frame
-                Grid.Row="1"
                 Padding="10"
                 Margin="20, 0, 20, 0"
                 BackgroundColor="Azure"
@@ -64,7 +49,6 @@
                     </StackLayout>
             </Frame>
             <Frame
-            Grid.Row="2"
             Padding="10"
             Margin="20, 0, 20, 0"
             BackgroundColor="Azure"
@@ -86,7 +70,6 @@
                 </StackLayout>
             </Frame>
             <Frame
-                Grid.Row="3"
                 Padding="10"
                 Margin="20, 0, 20, 0"
                 BackgroundColor="Azure"
@@ -106,8 +89,7 @@
                         </Frame>
                     </StackLayout>
             </Frame>
-            <Frame
-                Grid.Row="4"
+                <Frame
                 Padding="10"
                 Margin="20, 0, 20, 0"
                 BackgroundColor="Azure"
@@ -128,9 +110,13 @@
                                 IsEnabled="{Binding IsEnabledTxt}"/>
                         </Frame>
                     </StackLayout>
-            </Frame>
+                </Frame>
 
-                <StackLayout Grid.Row="5" Orientation="Horizontal" HorizontalOptions="Center" Padding="0" HeightRequest="50">
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Padding="0"
+                    HeightRequest="50">
                     <Frame
                         Padding="0"
                         BackgroundColor="Azure"
@@ -146,7 +132,7 @@
                         IsVisible="{Binding IsVisibleTxt}"
                         Color="Blue"
                         BackgroundColor="Transparent"
-                        Scale="0.8" />
+                        Scale="0.8"/>
                     <Frame
                         Padding="0"
                         BackgroundColor="Azure"
@@ -161,7 +147,6 @@
 
 
                 <StackLayout
-                    Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalOptions="Center"
                     Margin="0"
@@ -189,19 +174,35 @@
                     </Frame>
                     
             </StackLayout>
-                <Frame
-                    Grid.Row="7"
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="5">
+                    <Frame
                     Padding="0"
-                    Margin="40,0,40,20"
+                    Margin="0"
+                    BackgroundColor="Azure"
+                    CornerRadius="20">
+                        <Button
+                        Text="Cambiar Foto"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        Command="{Binding CambiarFotoCommand}"/>
+                    </Frame>
+                    <Frame
+                    Padding="0"
+                    Margin="0"
                     BackgroundColor="DarkRed"
                     CornerRadius="20">
-                    <Button
+                        <Button
                         Text="Cerrar Sesión"
                         BackgroundColor="Transparent"
                         TextColor="White"
                         Command="{Binding LogoutCommand}"/>
-                </Frame>
-            </Grid>
+                    </Frame>
+                </StackLayout>
+                
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

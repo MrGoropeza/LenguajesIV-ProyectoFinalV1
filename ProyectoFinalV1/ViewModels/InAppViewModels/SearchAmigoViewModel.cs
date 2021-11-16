@@ -100,8 +100,8 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
             IsRunningTxt = true;
             IsVisibleTxt = true;
             searchCollection.Clear();
-            await Task.Delay(1000);
             await LlenarBusqueda();
+            await Task.Delay(1000);
             IsVisibleTxt = false;
             IsRunningTxt = false;
         }
@@ -120,6 +120,15 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                             || item.username.ToLowerInvariant().Contains(BusquedaTxt))
                         {
                             item.nomYapel = item.nombre + " " + item.apellido;
+                            var imageRequest = await App.firebaseBDD.getImageUrlFromUser(item.username);
+                            if (imageRequest.Equals("none"))
+                            {
+                                item.imageUrl = "defaultUser.png";
+                            }
+                            else
+                            {
+                                item.imageUrl = imageRequest;
+                            }
                             SearchItems.Add(item);
                         }
                     }

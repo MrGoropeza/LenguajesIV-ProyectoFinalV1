@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.InAppPages.CambiarFotoPage"
+             Title="Cambiar foto de perfil">
+    <ContentPage.Content>
+        <StackLayout
+            BackgroundColor="SlateGray">
+            <Frame
+                Padding="0"
+                Margin="20, 30"
+                BackgroundColor="Azure"
+                CornerRadius="20"
+                HeightRequest="300">
+                <Image
+                    x:Name="imagen"
+                    Source="{Binding ImageUrl}"
+                    Aspect="AspectFill"
+                    HeightRequest="200"/>
+            </Frame>
+            <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="5">
+                <Frame
+                    Padding="0"
+                    Margin="0"
+                    BackgroundColor="Azure"
+                    CornerRadius="20">
+                    <Button
+                        Text="Cambiar Foto"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        Command="{Binding ElegirFotoCommand}"/>
+                </Frame>
+                <ActivityIndicator
+                    IsVisible="{Binding IsVisibleTxt}"
+                    IsRunning="{Binding IsRunningTxt}"
+                    Color="Blue"
+                    BackgroundColor="Transparent"
+                    Scale="0.8"/>
+                <Frame
+                    Padding="0"
+                    Margin="0"
+                    BackgroundColor="Azure"
+                    CornerRadius="20">
+                    <Button
+                        Text="Subir Foto"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        Command="{Binding SubirFotoCommand}"/>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

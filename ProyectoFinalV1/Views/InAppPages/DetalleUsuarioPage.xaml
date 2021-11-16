@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalV1.Views.InAppPages.DetalleUsuarioPage"
              NavigationPage.HasNavigationBar="True">
+<!-- be aware that pull-to-refresh will not work if all elements in the list can fit on the screen (in other words, if vertical scrolling isn't required). -->
     <RefreshView
             IsRefreshing="{Binding IsRefreshingTxt}"
             Command="{Binding RefreshCommand}">
@@ -10,11 +11,13 @@
         <StackLayout
             BackgroundColor="SlateGray">
             <Frame
-                CornerRadius="100">
+                CornerRadius="100"
+                Padding="0"
+                Margin="25,10">
                 <Image
                     Source="{Binding ImageUrl}"
-                    HeightRequest="300"
-                    WidthRequest="300"
+                    HeightRequest="330"
+                    WidthRequest="256"
                     Aspect="AspectFill"/>
             </Frame>
             <Frame
@@ -26,11 +29,13 @@
                     <Label
                         Text="{Binding NomTxt}"
                         TextColor="white"
-                        HorizontalTextAlignment="Center"/>
+                        HorizontalTextAlignment="Center"
+                        FontSize="30"/>
                     <Label
                         Text="{Binding UsernameTxt}"
                         TextColor="White"
-                        HorizontalTextAlignment="Center"/>
+                        HorizontalTextAlignment="Center"
+                        FontSize="25"/>
                     <Label
                         Text="{Binding EdadTxt}"
                         TextColor="White"
@@ -47,11 +52,13 @@
                     <Label
                         Text="{Binding SituacionTxt}"
                         TextColor="White"
+                        FontSize="20"
                         HorizontalTextAlignment="Center"/>
                     <StackLayout
                         BackgroundColor="Transparent"
                         Orientation="Horizontal"
                         HorizontalOptions="Center">
+                        
                         <Button
                             BackgroundColor="Green"
                             Text="{Binding AddFriendTxt}"
