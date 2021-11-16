@@ -11,19 +11,15 @@ using Xamarin.Forms.Xaml;
 namespace ProyectoFinalV1.Views.InAppPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AmigosPage : ContentPage
+    public partial class SearchAmigoPage : ContentPage
     {
-        AmigosViewModel contexto;
-        public AmigosPage()
+        SearchAmigoViewModel contexto;
+        public SearchAmigoPage(string busqueda)
         {
             InitializeComponent();
-            contexto = new AmigosViewModel();
+            contexto = new SearchAmigoViewModel();
+            contexto.BusquedaTxt = busqueda;
             BindingContext = contexto;
-        }
-
-        private async void searchBar_SearchButtonPressed(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SearchAmigoPage(contexto.BusquedaTxt));
         }
     }
 }

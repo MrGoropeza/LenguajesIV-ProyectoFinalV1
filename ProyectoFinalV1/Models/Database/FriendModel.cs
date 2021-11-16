@@ -6,6 +6,8 @@ namespace ProyectoFinalV1.Models
 {
     public class FriendModel
     {
-        public string ID { get; set; }
-    }
+        public string username { get; set; }
+        public bool aceptado { get; set; }
+        public string sender { get; set; }
+    }   
 }

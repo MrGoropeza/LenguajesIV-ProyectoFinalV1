@@ -1,9 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using ProyectoFinalV1.Models;
+using ProyectoFinalV1.Views.InAppPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ProyectoFinalV1.ViewModels.InAppViewModels
@@ -12,35 +14,34 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
     {
         #region atributos
         private string busqueda;
-        private string busquedaString;
 
-        private ObservableCollection<OpinionModel> opinionesCollection;
+        private ObservableCollection<UserModel> amigosCollection;
+        private object amigoSelection;
 
-
-        private int itemTreshold;
+        private bool noHayResultados;
         private bool isRefreshing;
         private bool isVisible;
         #endregion
         #region propiedades
-        public string BusquedaStringTxt
-        {
-            get { return this.busquedaString; }
-            set { SetValue(ref this.busquedaString, value); }
-        }
         public string BusquedaTxt
         {
             get { return this.busqueda; }
             set { SetValue(ref this.busqueda, value); }
         }
-        public ObservableCollection<OpinionModel> SearchItems
+        public ObservableCollection<UserModel> AmigosItems
         {
-            get { return this.opinionesCollection; }
-            set { SetValue(ref this.opinionesCollection, value); }
+            get { return this.amigosCollection; }
+            set { SetValue(ref this.amigosCollection, value); }
         }
-        public int ItemTreshold
+        public object AmigoSelection
         {
-            get { return this.itemTreshold; }
-            set { SetValue(ref this.itemTreshold, value); }
+            get { return this.amigoSelection; }
+            set { SetValue(ref this.amigoSelection, value); }
+        }
+        public bool NoHayResultadosTxt
+        {
+            get { return this.noHayResultados; }
+            set { SetValue(ref this.noHayResultados, value); }
         }
         public bool IsRefreshingTxt
         {
@@ -61,50 +62,55 @@ namespace ProyectoFinalV1.ViewModels.InAppViewModels
                 return new RelayCommand(RefreshMethod);
             }
         }
-        public ICommand BuscarCommand
+        public ICommand AmigoSelectCommand
         {
             get
             {
-                return new RelayCommand(BuscarMethod);
-            }
-        }
-        public ICommand ActualizarBusquedaCommand
-        {
-            get
-            {
-                return new RelayCommand(ActualizarBusquedaMethod);
-            }
-        }
-        public ICommand BusquedaSelectCommand
-        {
-            get
-            {
-                return new RelayCommand(BusquedaSelectMethod);
+                return new RelayCommand(AmigoSelectMethod);
             }
         }
         #endregion
         #region Metodos
-        private void RefreshMethod()
+        private async void LlenarAmigos()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var request = await App.firebaseBDD.getAmigosDeUser(App.usuarioLogeado.username);
+                foreach(UserModel amigo in request)
+                {
+                    amigo.nomYapel = amigo.nombre + " " + amigo.apellido;
+                    AmigosItems.Add(amigo);
+                }
+            }
+            catch (Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error",e.Message,"Aceptar");
+            }
         }
-        private void BuscarMethod()
+        private async void RefreshMethod()
         {
-            throw new NotImplementedException();
+            IsRefreshingTxt = true;
+            IsVisibleTxt = true;
+            AmigosItems.Clear();
+            await Task.Delay(1000);
+            LlenarAmigos();
+            IsRefreshingTxt = false;
+            IsVisibleTxt = false;
         }
-        private void ActualizarBusquedaMethod()
+        private async void AmigoSelectMethod()
         {
-            throw new NotImplementedException();
-        }
-        private void BusquedaSelectMethod()
-        {
-            throw new NotImplementedException();
+            if (amigoSelection != null)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new DetalleUsuarioPage((UserModel)amigoSelection));
+            }
+            AmigoSelection = null;
         }
         #endregion
         #region Constructor
         public AmigosViewModel()
         {
-
+            amigosCollection = new ObservableCollection<UserModel>();
+            LlenarAmigos();
         }
         #endregion
     }

@@ -71,6 +71,9 @@ namespace ProyectoFinalV1.ViewModels
                     "Error",
                     "Debes ingresar un correo.",
                     "Aceptar");
+                this.IsVisibleTxt = false;
+                this.IsRunningTxt = false;
+                this.IsEnabledTxt = true;
                 return;
             }
             if (string.IsNullOrEmpty(this.password))
@@ -79,6 +82,9 @@ namespace ProyectoFinalV1.ViewModels
                     "Error",
                     "Debes ingresar una contraseña.",
                     "Aceptar");
+                this.IsVisibleTxt = false;
+                this.IsRunningTxt = false;
+                this.IsEnabledTxt = true;
                 return;
             }
 
@@ -119,7 +125,7 @@ namespace ProyectoFinalV1.ViewModels
             }
             catch (Exception ex)
             {
-
+                await App.Current.MainPage.DisplayAlert("Error",ex.Message,"Aceptar");
             }
 
         }

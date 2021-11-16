@@ -1,49 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProyectoFinalV1.Views.InAppPages.AmigosPage">
-    
-    
-    <RefreshView IsRefreshing="{Binding IsRefreshingTxt}"
-                     Command="{Binding RefreshCommand}">
+             x:Class="ProyectoFinalV1.Views.InAppPages.SearchAmigoPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
         <StackLayout 
-        BackgroundColor="SlateGray">
+            BackgroundColor="SlateGray">
             <Frame 
-            CornerRadius="20"
-            Margin="10, 10, 10, 10"
-            Padding="0"
-            BackgroundColor="CadetBlue">
+                CornerRadius="20"
+                Margin="10, 10, 10, 10"
+                Padding="0"
+                BackgroundColor="CadetBlue">
                 <SearchBar
-                x:Name="searchBar"
-                CancelButtonColor="White"
-                PlaceholderColor="White"
-                TextColor="White"
-                Placeholder="Buscar personas en la red"
-                Text="{Binding BusquedaTxt,Mode=TwoWay}"
-                SearchButtonPressed="searchBar_SearchButtonPressed"/>
+                        x:Name="searchBar"
+                        CancelButtonColor="White"
+                        PlaceholderColor="White"
+                        TextColor="White"
+                        Placeholder="Buscar personas en la red"
+                        Text="{Binding BusquedaTxt,Mode=TwoWay}"
+                        SearchCommand="{Binding BuscarCommand}"/>
             </Frame>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunningTxt}"
+                IsVisible="{Binding IsVisibleTxt}"
+                Color="Blue"
+                Scale="0.8"/>
             <ScrollView>
                 <Frame 
                     CornerRadius="20"
                     Margin="10, 5, 10, 10"
                     Padding="10"
-                    HeightRequest="490"
+                    HeightRequest="550"
                     BackgroundColor="CadetBlue">
                     <StackLayout>
-                        <Label
-                        Text="Tus amigos: "
-                        TextColor="White"
-                        FontSize="20"/>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                Text="Resultados de: "
+                                TextColor="White"
+                                FontSize="20"/>
+                            <Label
+                                Text="{Binding BusquedaTxt,Mode=TwoWay}"
+                                TextColor="White"
+                                FontSize="20"/>
+                        </StackLayout>
                         <Label
                             Text="No se encontraron resultados :C"
                             TextColor="White"
                             FontSize="20"
                             IsVisible="{Binding NoHayResultadosTxt}"/>
                         <CollectionView 
-                            ItemsSource="{Binding AmigosItems}"
+                            ItemsSource="{Binding SearchItems}"
                             SelectionMode="Single"
-                            SelectionChangedCommand="{Binding AmigoSelectCommand}"
-                            SelectedItem="{Binding AmigoSelection}">
+                            SelectionChangedCommand="{Binding BusquedaSelectCommand}"
+                            SelectedItem="{Binding BusquedaSelection}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical"/>
                             </CollectionView.ItemsLayout>
@@ -60,10 +70,11 @@
                                             <Label
                                                 Text="{Binding nomYapel}"
                                                 TextColor="White"
-                                                FontSize="20"/>
+                                                FontSize="25"/>
                                             <Label
                                                 Text="{Binding username}"
-                                                TextColor="White"/>
+                                                TextColor="White"
+                                                FontSize="20"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </DataTemplate>
@@ -73,5 +84,5 @@
                 </Frame>
             </ScrollView>
         </StackLayout>
-    </RefreshView>
+    </ContentPage.Content>
 </ContentPage>

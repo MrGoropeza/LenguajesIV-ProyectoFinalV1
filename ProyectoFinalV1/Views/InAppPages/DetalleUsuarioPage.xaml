@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalV1.Views.InAppPages.DetalleUsuarioPage"
+             NavigationPage.HasNavigationBar="True">
+    <RefreshView
+            IsRefreshing="{Binding IsRefreshingTxt}"
+            Command="{Binding RefreshCommand}">
+        <ScrollView>
+        <StackLayout
+            BackgroundColor="SlateGray">
+            <Frame
+                CornerRadius="100">
+                <Image
+                    Source="{Binding ImageUrl}"
+                    HeightRequest="300"
+                    WidthRequest="300"
+                    Aspect="AspectFill"/>
+            </Frame>
+            <Frame
+                BackgroundColor="CadetBlue"
+                CornerRadius="20"
+                Padding="10">
+                <StackLayout
+                    BackgroundColor="Transparent">
+                    <Label
+                        Text="{Binding NomTxt}"
+                        TextColor="white"
+                        HorizontalTextAlignment="Center"/>
+                    <Label
+                        Text="{Binding UsernameTxt}"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"/>
+                    <Label
+                        Text="{Binding EdadTxt}"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+            <Frame
+                BackgroundColor="CadetBlue"
+                CornerRadius="20"
+                Padding="10">
+                <StackLayout
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Center">
+                    <Label
+                        Text="{Binding SituacionTxt}"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"/>
+                    <StackLayout
+                        BackgroundColor="Transparent"
+                        Orientation="Horizontal"
+                        HorizontalOptions="Center">
+                        <Button
+                            BackgroundColor="Green"
+                            Text="{Binding AddFriendTxt}"
+                            TextColor="White"
+                            Command="{Binding AddFriendCommand}"
+                            IsEnabled="{Binding AddEnabledTxt}"/>
+                        <Button
+                            BackgroundColor="DarkRed"
+                            Text="{Binding RemoveFriendTxt}"
+                            TextColor="White"
+                            Command="{Binding RemoveFriendCommand}"
+                            IsEnabled="{Binding RemoveEnabledTxt}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>
